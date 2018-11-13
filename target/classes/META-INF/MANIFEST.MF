@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: silversnug
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: nidhijamar
+Implementation-Vendor-Id: edu.sjsu.seekers
+Build-Jdk: 1.8.0_51
+Implementation-URL: http://maven.apache.org
+Created-By: Maven Integration for Eclipse
+
