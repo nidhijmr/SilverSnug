@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SilverSnugService {
+public class AddressBookService {
 
     private final String SUCCESS = "SUCCESS";
     @Autowired
