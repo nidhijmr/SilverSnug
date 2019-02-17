@@ -18,7 +18,7 @@ public class DynamoDbClient {
     @PostConstruct
     private void init() {
         AWSCredentialsProvider awsCredentialsProvider = new ClasspathPropertiesFileCredentialsProvider("application.properties");
-        dynamoDB = AmazonDynamoDBClientBuilder.standard().withCredentials(awsCredentialsProvider).withRegion(Regions.US_EAST_2.getName()).build();
+        dynamoDB = AmazonDynamoDBClientBuilder.standard().withCredentials(awsCredentialsProvider).withRegion(Regions.US_EAST_1.getName()).build();
     }
 
     public AmazonDynamoDB getDynamoDB() {
