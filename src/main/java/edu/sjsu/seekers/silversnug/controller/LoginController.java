@@ -11,11 +11,11 @@ public class LoginController {
 	
 	@Autowired
 	LoginService loginService;
-	
+
 	@RequestMapping("/login")
     public String index() {
 		loginService.authenticate("nidhi");
-		return "Hello from Silver Snug!";    
+		return "Hello from Silver Snug!";
     }
-	
+
 }

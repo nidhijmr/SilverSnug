@@ -28,6 +28,21 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
+      <dependency>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>aws-java-sdk</artifactId>
+          <version>1.11.315</version>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
+      <dependency>
+          <groupId>com.amazonaws</groupId>
+          <artifactId>aws-java-sdk-dynamodb</artifactId>
+          <version>1.11.315</version>
+      </dependency>
+
   </dependencies>
   <build>
         <plugins>

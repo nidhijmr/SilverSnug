@@ -9,7 +9,7 @@ public class LoginService {
 
 	@Autowired
 	LoginDAO loginDAO;
-	
+
 	public void authenticate(String username) {
 		System.out.println("In service: " + username);
 		loginDAO.authenticate(username);
