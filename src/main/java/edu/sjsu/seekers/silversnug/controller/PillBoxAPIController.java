@@ -20,9 +20,6 @@ public class PillBoxAPIController {
         @ResponseBody
         public GenericResponse addPill(@RequestBody PillBoxRequest request) {
             return pillBoxService.savePill(request);
-
-               /*  pillBoxService.authenticate("Anu");
-                    return "Hello from Silver Snug!";*/
         }
 
         @GetMapping("/SilverSnug/PillBox/getPill")
