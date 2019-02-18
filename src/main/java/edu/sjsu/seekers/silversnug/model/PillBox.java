@@ -20,7 +20,6 @@ public class PillBox {
 
     }
 
-
     public PillBox(String userName, String pillBoxId, String medicineName, String potency, int dosage, String notes) {
         this.medicineName = medicineName;
         this.potency = potency;
@@ -83,7 +82,6 @@ public class PillBox {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
 
 }
 
