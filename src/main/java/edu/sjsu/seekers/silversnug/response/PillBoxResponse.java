@@ -1,0 +1,89 @@
+package edu.sjsu.seekers.silversnug.response;
+
+public class PillBoxResponse extends GenericResponse {
+
+    private static final long serialVersionUID = 1L;
+
+    private String userName;
+    private String pillBoxId;
+    private String medicineName;
+    private String potency;
+    private int dosage;
+    private String notes;
+
+    public PillBoxResponse() {
+
+    }
+
+
+    public PillBoxResponse(String userName, String pillBoxId, String medicineName, String potency, int dosage, String notes) {
+        this.medicineName = medicineName;
+        this.potency = potency;
+        this.dosage = dosage;
+        this.notes = notes;
+    }
+
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPillBoxId() {
+        return pillBoxId;
+    }
+
+    public void setPillBoxId(String pillBoxId) {
+        this.pillBoxId = pillBoxId;
+    }
+
+    public String getMedicineName() {
+        return medicineName;
+    }
+
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
+    }
+
+    public String getPotency() {
+        return potency;
+    }
+
+    public void setPotency(String potency) {
+        this.potency = potency;
+    }
+
+    public int getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(int dosage) {
+        this.dosage = dosage;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    @Override
+    public String toString() {
+        return "PillBoxResponse{" +
+                "userName='" + userName + '\'' +
+                ", pillBoxId='" + pillBoxId + '\'' +
+                ", medicineName='" + medicineName + '\'' +
+                ", potency='" + potency + '\'' +
+                ", dosage=" + dosage +
+                ", notes='" + notes + '\'' +
+                '}';
+    }
+
+}
+
+
