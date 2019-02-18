@@ -49,7 +49,7 @@ public class AddressBookService {
             response.setLongitude(addressBook.getLongitude());
             response.setMessage(SUCCESS);
         } else {
-            response.setMessage("No address found for this User.");
+            response.setMessage("No address found for this User");
         }
 
         return response;
