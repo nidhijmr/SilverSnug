@@ -11,7 +11,7 @@ public class LoginService {
 	LoginDAO loginDAO;
 
 	public void authenticate(String username) {
-		System.out.println("In service: " + username);
+		System.out.println("In service " + username);
 		loginDAO.authenticate(username);
 	}
 	
