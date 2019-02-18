@@ -35,7 +35,7 @@ public class PillBoxService {
         pillBoxDao.save(pillBox);
 
         GenericResponse response = new GenericResponse();
-        response.setMessage(SUCCESS);
+        response.setMessage(PILL_ADD_SUCCESS);
         response.setStatus(HttpStatus.OK.toString());
 
         return response;
@@ -54,7 +54,7 @@ public class PillBoxService {
             response.setPotency(pillBox.getPotency());
             response.setMessage(SUCCESS);
         } else {
-            response.setMessage("No pill added");
+            response.setMessage(UNSUCCESSFUL_GET_PILL);
         }
 
         return response;
