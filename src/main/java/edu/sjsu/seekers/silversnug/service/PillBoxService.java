@@ -54,7 +54,7 @@ public class PillBoxService {
             response.setPotency(pillBox.getPotency());
             response.setMessage(SUCCESS);
         } else {
-            response.setMessage("No pill Box added");
+            response.setMessage("No pill added");
         }
 
         return response;
