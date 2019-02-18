@@ -25,17 +25,25 @@ public class UserService {
     }
 
     public GenericResponse saveUser(UserSignupRequest userSignupRequest) {
-        String uuid = UUID.randomUUID().toString();
-
-        User user = new User(userSignupRequest.getUserName(), uuid, userSignupRequest.getEmailId(),
-                    userSignupRequest.getEmergencyContactNumber(),userSignupRequest.getFirstName(),userSignupRequest.getLastName(),userSignupRequest.getPassword(),
-                    userSignupRequest.getPhoneNumber(),userSignupRequest.getProfileImage(),userSignupRequest.getRole());
-        userDAO.saveUser(user);
-
         GenericResponse response = new GenericResponse();
-        response.setMessage(USER_ADD_SUCCESS);
-        response.setStatus(HttpStatus.OK.toString());
+        User userOld = userDAO.getUserByUserName(userSignupRequest.getUserName());
+        if (null == userOld) {
 
+            String uuid = UUID.randomUUID().toString();
+
+            User user = new User(userSignupRequest.getUserName(), uuid, userSignupRequest.getEmailId(),
+                    userSignupRequest.getEmergencyContactNumber(), userSignupRequest.getFirstName(), userSignupRequest.getLastName(), userSignupRequest.getPassword(),
+                    userSignupRequest.getPhoneNumber(), userSignupRequest.getProfileImage(), userSignupRequest.getRole());
+            userDAO.saveUser(user);
+
+
+            response.setMessage(USER_ADD_SUCCESS);
+            response.setStatus(HttpStatus.CREATED.toString());
+        }
+        else{
+            response.setMessage(USERNAME_ALREADY_EXISTS);
+            response.setStatus(HttpStatus.EXPECTATION_FAILED.toString());
+        }
         return response;
     }
 
