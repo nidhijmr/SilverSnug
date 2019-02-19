@@ -6,7 +6,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 @DynamoDBTable(tableName = "address")
 public class AddressBook {
-    private String userName;
+    private String userId;
     private String addressId;
     private String addressName;
     private String latitude;
@@ -16,21 +16,21 @@ public class AddressBook {
 
     }
 
-    public AddressBook(String userName, String addressId, String addressName, String latitude, String longitude) {
-        this.userName = userName;
+    public AddressBook(String userId, String addressId, String addressName, String latitude, String longitude) {
+        this.userId = userId;
         this.addressId = addressId;
         this.addressName = addressName;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    @DynamoDBAttribute(attributeName = "userName")
-    public String getUserName() {
-        return userName;
+    @DynamoDBAttribute(attributeName = "userId")
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @DynamoDBHashKey(attributeName = "addressId")

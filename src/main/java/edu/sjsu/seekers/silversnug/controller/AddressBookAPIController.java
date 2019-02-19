@@ -17,14 +17,17 @@ public class AddressBookAPIController {
     @ResponseBody
     public GenericResponse addAddress(@RequestBody AddressBookRequest request) {
         return addressBookService.saveAddress(request);
-
-        //        addressBookService.authenticate("Ashwini");
-        //        return "Hello from Silver Snug!";
     }
 
     @GetMapping("/SilverSnug/Address/getAddress")
-    public AddressBookResponse getAddress(String userName) {
-        return addressBookService.getAddressByUserName(userName);
+    public AddressBookResponse getAddress(String userId) {
+        return addressBookService.getAddressByUserId(userId);
+    }
+
+    @PostMapping("/SilverSnug/Address/removeAddress")
+    @ResponseBody
+    public GenericResponse removeAddress(String userId,String addressName) {
+        return addressBookService.removeAddress(userId,addressName);
     }
 
 }
