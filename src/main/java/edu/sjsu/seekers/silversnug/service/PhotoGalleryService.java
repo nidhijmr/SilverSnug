@@ -2,6 +2,8 @@ package edu.sjsu.seekers.silversnug.service;
 
 import edu.sjsu.seekers.silversnug.dao.PhotoGalleryDao;
 import edu.sjsu.seekers.silversnug.model.PhotoGallery;
+import edu.sjsu.seekers.silversnug.request.DeletePhotoRequest;
+import edu.sjsu.seekers.silversnug.request.EditPhotoRequest;
 import edu.sjsu.seekers.silversnug.request.PhotoGalleryRequest;
 import edu.sjsu.seekers.silversnug.response.PhotoGalleryResponse;
 import edu.sjsu.seekers.silversnug.response.GenericResponse;
@@ -57,4 +59,46 @@ public class PhotoGalleryService {
         return response;
 
     }
+
+    public GenericResponse deletePhoto(DeletePhotoRequest request)
+    {
+        GenericResponse response = new GenericResponse();
+
+        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserName(request.getUserName());
+        if(null!=photoGallery) {
+            photoGalleryDao.deletePhoto(request.getUserName(), request.getPhotoId());
+
+            response.setMessage(SUCCESS);
+            response.setStatus(HttpStatus.OK.toString());
+        }
+        else
+        {
+            response.setMessage("photos not found for this User.");
+        }
+
+        return response;
+    }
+
+    public GenericResponse editPhoto(EditPhotoRequest request)
+    {
+        GenericResponse response = new GenericResponse();
+
+        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserName(request.getUserName());
+        if(null!=photoGallery) {
+            photoGalleryDao.editPhoto(request);
+
+            response.setMessage(SUCCESS);
+            response.setStatus(HttpStatus.OK.toString());
+        }
+        else
+        {
+            response.setMessage("photos not found for this User.");
+        }
+
+        return response;
+
+    }
+
+
+
 }
