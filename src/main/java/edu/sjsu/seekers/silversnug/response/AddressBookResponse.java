@@ -1,74 +1,37 @@
 package edu.sjsu.seekers.silversnug.response;
 
+import edu.sjsu.seekers.silversnug.model.AddressBook;
+
+import java.util.List;
+
 public class AddressBookResponse extends GenericResponse {
 
-    private static final long serialVersionUID = 2L;
-    private String userName;
-    private String addressId;
-    private String addressName;
-    private String latitude;
-    private String longitude;
+    private static final long serialVersionUID = 3543385351755692064L;
+    private List<AddressBook> addressBooks;
 
     public AddressBookResponse(){
 
     }
 
-    public AddressBookResponse(String userName, String addressId, String addressName, String latitude, String longitude) {
-        this.userName = userName;
-        this.addressId = addressId;
-        this.addressName = addressName;
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public AddressBookResponse(List<AddressBook> addressBooks) {
+        super();
+        this.addressBooks = addressBooks;
     }
 
-    public String getUserName() {
-        return userName;
+    public List<AddressBook> getAddressBooks() {
+        return addressBooks;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(String addressId) {
-        this.addressId = addressId;
-    }
-
-    public String getAddressName() {
-        return addressName;
-    }
-
-    public void setAddressName(String addressName) {
-        this.addressName = addressName;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setAddressBooks(List<AddressBook> addressBooks) {
+        this.addressBooks = addressBooks;
     }
 
     @Override
     public String toString() {
         return "AddressBookResponse{" +
-                "userName='" + userName + '\'' +
-                ", addressId='" + addressId + '\'' +
-                ", addressName='" + addressName + '\'' +
-                ", latitude='" + latitude + '\'' +
-                ", longitude='" + longitude + '\'' +
+                "addressBooks=" + addressBooks +
+                ", status='" + status + '\'' +
+                ", message='" + message + '\'' +
                 '}';
     }
 }

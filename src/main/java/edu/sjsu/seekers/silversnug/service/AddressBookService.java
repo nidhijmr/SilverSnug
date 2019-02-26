@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class AddressBookService {
 
     private final String SUCCESS = "SUCCESS";
+
     @Autowired
     AddressBookDao addressBookDao;
 
@@ -22,9 +25,10 @@ public class AddressBookService {
 
     public GenericResponse saveAddress(AddressBookRequest request) {
 
+        String addressUUID = UUID.randomUUID().toString();
         AddressBook addressBook = new AddressBook();
-        addressBook.setUserName(request.getUserName());
-        addressBook.setAddressId(request.getAddressId());
+        addressBook.setUserId(request.getUserId());
+        addressBook.setAddressId(addressUUID);
         addressBook.setAddressName(request.getAddressName());
         addressBook.setLatitude(request.getLatitude());
         addressBook.setLongitude(request.getLongitude());
@@ -37,21 +41,34 @@ public class AddressBookService {
         return response;
     }
 
-    public AddressBookResponse getAddressByUserName(String userName) {
+    public AddressBookResponse getAddressByUserId(String userId) {
         AddressBookResponse response = new AddressBookResponse();
 
-        AddressBook addressBook = addressBookDao.getAddressByUserName(userName);
-        if (null != addressBook) {
-            response.setUserName(addressBook.getUserName());
-            response.setAddressId(addressBook.getAddressId());
-            response.setAddressName(addressBook.getAddressName());
-            response.setLatitude(addressBook.getLatitude());
-            response.setLongitude(addressBook.getLongitude());
-            response.setMessage(SUCCESS);
+        AddressBookResponse addressBookResponse = addressBookDao.getAddressByUserId(userId);
+        if (null != addressBookResponse) {
+            response = addressBookResponse;
         } else {
-            response.setMessage("No address found for this User.");
+            response.setMessage("No address found for this User");
         }
 
         return response;
     }
+
+    public GenericResponse removeAddress(String userId,String addressName) {
+
+        GenericResponse response = new GenericResponse();
+        String addressID = addressBookDao.getAddressIdByAddressName(userId,addressName);
+        if(addressID!=null) {
+            addressBookDao.removeAddress(addressID);
+            response.setMessage(SUCCESS);
+            response.setStatus(HttpStatus.OK.toString());
+        }
+
+        else {
+            response.setMessage("No address found for this User");
+        }
+
+        return response;
+    }
+
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class AddressBookRequest implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String userName;
+    private String userId;
     private String addressId;
     private String addressName;
     private String latitude;
@@ -15,20 +15,20 @@ public class AddressBookRequest implements Serializable {
 
     }
 
-    public AddressBookRequest(String userName, String addressId, String addressName, String latitude, String longitude) {
-        this.userName = userName;
+    public AddressBookRequest(String userId, String addressId, String addressName, String latitude, String longitude) {
+        this.userId = userId;
         this.addressId = addressId;
         this.addressName = addressName;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAddressId() {
@@ -66,7 +66,7 @@ public class AddressBookRequest implements Serializable {
     @Override
     public String toString() {
         return "AddressBookRequest{" +
-                "userName='" + userName + '\'' +
+                "userName='" + userId + '\'' +
                 ", addressId='" + addressId + '\'' +
                 ", addressName='" + addressName + '\'' +
                 ", latitude='" + latitude + '\'' +
