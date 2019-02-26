@@ -76,7 +76,7 @@ public class PillBoxService {
         }
         else
         {
-            response.setMessage("pills not found for this User.");
+            response.setMessage(UNSUCCESSFUL_PILL_USER);
         }
 
         return response;
@@ -96,7 +96,7 @@ public class PillBoxService {
         }
         else
         {
-            response.setMessage("pills not found for this User.");
+            response.setMessage(UNSUCCESSFUL_PILL_USER);
         }
 
         return response;
