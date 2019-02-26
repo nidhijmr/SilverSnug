@@ -10,14 +10,14 @@ public class PillBoxRequest implements Serializable {
     private String pillBoxId;
     private String medicineName;
     private String potency;
-    private int dosage;
+    private String dosage;
     private String notes;
 
     public PillBoxRequest() {
 
     }
 
-    public PillBoxRequest(String userName, String pillBoxId, String medicineName, String potency, int dosage, String notes) {
+    public PillBoxRequest(String userName, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
         this.medicineName = medicineName;
         this.potency = potency;
         this.dosage = dosage;
@@ -56,11 +56,11 @@ public class PillBoxRequest implements Serializable {
         this.potency = potency;
     }
 
-    public int getDosage() {
+    public String getDosage() {
         return dosage;
     }
 
-    public void setDosage(int dosage) {
+    public void setDosage(String dosage) {
         this.dosage = dosage;
     }
 
