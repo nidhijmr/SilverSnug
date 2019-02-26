@@ -1,6 +1,8 @@
 package edu.sjsu.seekers.silversnug.controller;
 
 import edu.sjsu.seekers.silversnug.request.AddressBookRequest;
+import edu.sjsu.seekers.silversnug.request.DeletePillRequest;
+import edu.sjsu.seekers.silversnug.request.EditPillRequest;
 import edu.sjsu.seekers.silversnug.request.PillBoxRequest;
 import edu.sjsu.seekers.silversnug.response.AddressBookResponse;
 import edu.sjsu.seekers.silversnug.response.GenericResponse;
@@ -27,5 +29,18 @@ public class PillBoxAPIController {
             return pillBoxService.getPillByUserName(userName);
         }
 
+        @PostMapping("/SilverSnug/PillBox/deletePill")
+        @ResponseBody
+        public GenericResponse deletepill(@RequestBody DeletePillRequest request)
+        {
+            return pillBoxService.deletePill(request);
+        }
+
+    @PostMapping("/SilverSnug/PillBox/editPill")
+    @ResponseBody
+    public GenericResponse editPill(@RequestBody EditPillRequest request)
+    {
+        return pillBoxService.editPill(request);
+    }
     }
 

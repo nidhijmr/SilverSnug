@@ -1,28 +1,29 @@
-package edu.sjsu.seekers.silversnug.response;
+package edu.sjsu.seekers.silversnug.request;
 
-public class PillBoxResponse extends GenericResponse {
+import java.io.Serializable;
+
+public class EditPillRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private String userName;
-    private String pillBoxId;
     private String medicineName;
     private String potency;
     private String dosage;
     private String notes;
 
-    public PillBoxResponse() {
+    public EditPillRequest()
+    {
 
     }
 
 
-    public PillBoxResponse(String userName, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
+    public EditPillRequest(String medicineName, String potency, String dosage, String notes)
+    {
         this.medicineName = medicineName;
-        this.potency = potency;
+        this.potency= potency;
         this.dosage = dosage;
         this.notes = notes;
     }
-
 
     public String getUserName() {
         return userName;
@@ -30,14 +31,6 @@ public class PillBoxResponse extends GenericResponse {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getPillBoxId() {
-        return pillBoxId;
-    }
-
-    public void setPillBoxId(String pillBoxId) {
-        this.pillBoxId = pillBoxId;
     }
 
     public String getMedicineName() {
@@ -74,16 +67,12 @@ public class PillBoxResponse extends GenericResponse {
 
     @Override
     public String toString() {
-        return "PillBoxResponse{" +
+        return "EditPillRequest{" +
                 "userName='" + userName + '\'' +
-                ", pillBoxId='" + pillBoxId + '\'' +
                 ", medicineName='" + medicineName + '\'' +
                 ", potency='" + potency + '\'' +
                 ", dosage=" + dosage +
                 ", notes='" + notes + '\'' +
                 '}';
     }
-
 }
-
-

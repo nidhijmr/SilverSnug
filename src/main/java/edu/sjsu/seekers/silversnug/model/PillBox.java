@@ -12,7 +12,7 @@ public class PillBox {
     private String pillBoxId;
     private String medicineName;
     private String potency;
-    private int dosage;
+    private String dosage;
     private String notes;
 
     public PillBox()
@@ -20,7 +20,7 @@ public class PillBox {
 
     }
 
-    public PillBox(String userName, String pillBoxId, String medicineName, String potency, int dosage, String notes) {
+    public PillBox(String userName, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
         this.medicineName = medicineName;
         this.potency = potency;
         this.dosage = dosage;
@@ -66,11 +66,11 @@ public class PillBox {
     }
 
     @DynamoDBAttribute(attributeName = "dosage")
-    public int getDosage() {
+    public String getDosage() {
         return dosage;
     }
 
-    public void setDosage(int dosage) {
+    public void setDosage(String dosage) {
         this.dosage = dosage;
     }
 
