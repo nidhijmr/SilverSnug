@@ -54,7 +54,7 @@ public class PillBoxService {
         if (null != pillBoxResponse) {
             response = pillBoxResponse;
         } else {
-            response.setMessage("No address found for this User");
+            response.setMessage(UNSUCCESSFUL_PILL_USER);
         }
 
         return response;
