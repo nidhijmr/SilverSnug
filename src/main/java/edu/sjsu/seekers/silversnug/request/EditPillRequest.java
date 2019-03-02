@@ -69,7 +69,10 @@ public class EditPillRequest implements Serializable {
     public String toString() {
         return "EditPillRequest{" +
                 "userId='" + userId + '\'' +
-                ", k +
+                ", medicineName='" + medicineName + '\'' +
+                ", potency='" + potency + '\'' +
+                ", dosage=" + dosage +
+                ", notes='" + notes + '\'' +
                 '}';
     }
 }
