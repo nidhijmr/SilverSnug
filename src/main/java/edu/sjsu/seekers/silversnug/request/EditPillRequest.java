@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class EditPillRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String userName;
+    private String userId;
     private String medicineName;
     private String potency;
     private String dosage;
@@ -25,12 +25,12 @@ public class EditPillRequest implements Serializable {
         this.notes = notes;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getMedicineName() {
@@ -68,11 +68,8 @@ public class EditPillRequest implements Serializable {
     @Override
     public String toString() {
         return "EditPillRequest{" +
-                "userName='" + userName + '\'' +
-                ", medicineName='" + medicineName + '\'' +
-                ", potency='" + potency + '\'' +
-                ", dosage=" + dosage +
-                ", notes='" + notes + '\'' +
+                "userId='" + userId + '\'' +
+                ", k +
                 '}';
     }
 }

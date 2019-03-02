@@ -8,7 +8,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 @DynamoDBTable(tableName = "pillbox")
 public class PillBox {
 
-    private String userName;
+    private String userId;
     private String pillBoxId;
     private String medicineName;
     private String potency;
@@ -20,7 +20,7 @@ public class PillBox {
 
     }
 
-    public PillBox(String userName, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
+    public PillBox(String userId, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
         this.medicineName = medicineName;
         this.potency = potency;
         this.dosage = dosage;
@@ -28,13 +28,13 @@ public class PillBox {
     }
 
 
-    @DynamoDBAttribute(attributeName = "userName")
-    public String getUserName() {
-        return userName;
+    @DynamoDBAttribute(attributeName = "userId")
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @DynamoDBHashKey(attributeName = "pillboxId")

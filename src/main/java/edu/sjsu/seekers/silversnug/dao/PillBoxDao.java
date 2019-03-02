@@ -5,10 +5,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.util.CollectionUtils;
-import edu.sjsu.seekers.silversnug.model.AddressBook;
 import edu.sjsu.seekers.silversnug.model.PillBox;
 import edu.sjsu.seekers.silversnug.request.EditPillRequest;
+import edu.sjsu.seekers.silversnug.response.PillBoxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import java.util.Map;
 
 @Repository
 public class PillBoxDao {
+
+    private final String SUCCESS = "SUCCESS";
 
     @Autowired
     DynamoDbClient dynamodbClient;
@@ -29,33 +32,37 @@ public class PillBoxDao {
             mapper.save(pillBox);
         }
 
-        public PillBox getPillByUserName(String userName) {
+        public PillBoxResponse getPillByUserId(String userId) {
             AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
             DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
             Map<String, AttributeValue> values = new HashMap<>();
-            values.put(":userName", new AttributeValue().withS(userName));
+            values.put(":userId", new AttributeValue().withS(userId));
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                    .withFilterExpression("userName = :userName").withExpressionAttributeValues(values);
+                    .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
 
             List<PillBox> pillbox = mapper.scan(PillBox.class, scanExpression);
             if (!CollectionUtils.isNullOrEmpty(pillbox)) {
-                return pillbox.get(0);
+                PillBoxResponse pillBoxResponse = new PillBoxResponse();
+                pillBoxResponse.setPillBoxes(pillbox);
+                pillBoxResponse.setStatus(HttpStatus.OK.toString());
+                pillBoxResponse.setMessage(SUCCESS);
+                return pillBoxResponse;
             }
             return null;
         }
 
 
-    public void deletePill( String userName, String pillboxId)
+    public void deletePill( String userId, String pillboxId)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
         Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userName", new AttributeValue().withS(userName));
+        values.put(":userId", new AttributeValue().withS(userId));
         values.put(":pillBoxId", new AttributeValue().withS(pillboxId));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userName = :userName and pillBoxId = :pillBoxId").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId and pillBoxId = :pillBoxId").withExpressionAttributeValues(values);
 
         List<PillBox> pillbox = mapper.scan(PillBox.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(pillbox)) {
@@ -70,9 +77,9 @@ public class PillBoxDao {
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
         Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userName", new AttributeValue().withS(request.getUserName()));
+        values.put(":userId", new AttributeValue().withS(request.getUserId()));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userName = :userName").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
 
         List<PillBox> pillBox = mapper.scan(PillBox.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(pillBox)){
