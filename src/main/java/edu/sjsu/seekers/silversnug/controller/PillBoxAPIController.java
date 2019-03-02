@@ -25,8 +25,8 @@ public class PillBoxAPIController {
         }
 
         @GetMapping("/SilverSnug/PillBox/getPill")
-        public PillBoxResponse getPill(String userName) {
-            return pillBoxService.getPillByUserName(userName);
+        public PillBoxResponse getPill(String userId) {
+            return pillBoxService.getPillByUserId(userId);
         }
 
         @PostMapping("/SilverSnug/PillBox/deletePill")

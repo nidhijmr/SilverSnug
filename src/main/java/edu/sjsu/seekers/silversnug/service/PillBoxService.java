@@ -5,11 +5,14 @@ import edu.sjsu.seekers.silversnug.model.PillBox;
 import edu.sjsu.seekers.silversnug.request.DeletePillRequest;
 import edu.sjsu.seekers.silversnug.request.EditPillRequest;
 import edu.sjsu.seekers.silversnug.request.PillBoxRequest;
+import edu.sjsu.seekers.silversnug.response.AddressBookResponse;
 import edu.sjsu.seekers.silversnug.response.GenericResponse;
 import edu.sjsu.seekers.silversnug.response.PillBoxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 import static edu.sjsu.seekers.silversnug.util.Constants.*;
 
@@ -27,9 +30,10 @@ public class PillBoxService {
     }
     public GenericResponse savePill(PillBoxRequest request) {
 
+        String pillboxUUID = UUID.randomUUID().toString();
         PillBox pillBox = new PillBox();
-        pillBox.setUserName(request.getUserName());
-        pillBox.setPillBoxId(request.getPillBoxId());
+        pillBox.setUserId(request.getUserId());
+        pillBox.setPillBoxId(pillboxUUID);
         pillBox.setMedicineName(request.getMedicineName());
         pillBox.setDosage(request.getDosage());
         pillBox.setPotency(request.getPotency());
@@ -43,33 +47,27 @@ public class PillBoxService {
         return response;
     }
 
-    public PillBoxResponse getPillByUserName(String userName) {
+    public PillBoxResponse getPillByUserId(String userId) {
 
         PillBoxResponse response = new PillBoxResponse();
-        PillBox pillBox = pillBoxDao.getPillByUserName(userName);
-        if (null != pillBox) {
-            response.setUserName(pillBox.getUserName());
-            response.setPillBoxId(pillBox.getPillBoxId());
-            response.setMedicineName(pillBox.getMedicineName());
-            response.setDosage(pillBox.getDosage());
-            response.setNotes(pillBox.getNotes());
-            response.setPotency(pillBox.getPotency());
-            response.setMessage(SUCCESS);
+        PillBoxResponse pillBoxResponse = pillBoxDao.getPillByUserId(userId);
+        if (null != pillBoxResponse) {
+            response = pillBoxResponse;
         } else {
-            response.setMessage(UNSUCCESSFUL_GET_PILL);
+            response.setMessage("No address found for this User");
         }
 
         return response;
-
     }
+
 
     public GenericResponse deletePill(DeletePillRequest request) {
 
         GenericResponse response = new GenericResponse();
 
-        PillBox pillBox = pillBoxDao.getPillByUserName(request.getUserName());
+        PillBoxResponse pillBox = pillBoxDao.getPillByUserId(request.getUserId());
         if(null!=pillBox) {
-            pillBoxDao.deletePill(request.getUserName(), request.getPillBoxId());
+            pillBoxDao.deletePill(request.getUserId(), request.getPillBoxId());
 
             response.setMessage(SUCCESS);
             response.setStatus(HttpStatus.OK.toString());
@@ -87,7 +85,7 @@ public class PillBoxService {
 
         GenericResponse response = new GenericResponse();
 
-        PillBox pillBox = pillBoxDao.getPillByUserName(request.getUserName());
+        PillBoxResponse pillBox = pillBoxDao.getPillByUserId(request.getUserId());
         if(null!=pillBox) {
             pillBoxDao.editPill(request);
 

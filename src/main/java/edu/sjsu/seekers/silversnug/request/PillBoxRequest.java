@@ -6,7 +6,7 @@ public class PillBoxRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String userName;
+    private String userId;
     private String pillBoxId;
     private String medicineName;
     private String potency;
@@ -17,19 +17,20 @@ public class PillBoxRequest implements Serializable {
 
     }
 
-    public PillBoxRequest(String userName, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
+    public PillBoxRequest(String userId, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
+        this.userId = userId;
         this.medicineName = medicineName;
         this.potency = potency;
         this.dosage = dosage;
         this.notes = notes;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPillBoxId() {
@@ -75,7 +76,7 @@ public class PillBoxRequest implements Serializable {
     @Override
     public String toString() {
         return "PillBoxRequest{" +
-                "userName='" + userName + '\'' +
+                "userId='" + userId + '\'' +
                 ", pillBoxId='" + pillBoxId + '\'' +
                 ", medicineName='" + medicineName + '\'' +
                 ", potency='" + potency + '\'' +

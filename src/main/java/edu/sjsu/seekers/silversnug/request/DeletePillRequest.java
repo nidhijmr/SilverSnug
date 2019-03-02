@@ -4,7 +4,7 @@ import java.io.Serializable;
 public class DeletePillRequest implements Serializable {
     private static final long serialVersionUID = 1L;
     private String pillBoxId;
-    private String userName;
+    private String userId;
 
     public DeletePillRequest()
     {
@@ -12,9 +12,9 @@ public class DeletePillRequest implements Serializable {
     }
 
 
-    public DeletePillRequest(String userName, String pillBoxId)
+    public DeletePillRequest(String userId, String pillBoxId)
     {
-        this.userName = userName;
+        this.userId = userId;
         this.pillBoxId =  pillBoxId;
     }
 
@@ -26,19 +26,19 @@ public class DeletePillRequest implements Serializable {
         this.pillBoxId = pillBoxId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
         return "DeletePillRequest{" +
                 "pillBoxId='" + pillBoxId + '\'' +
-                ", userName='" + userName + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 
