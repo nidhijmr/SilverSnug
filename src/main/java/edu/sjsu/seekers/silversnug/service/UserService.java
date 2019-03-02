@@ -1,6 +1,7 @@
 package edu.sjsu.seekers.silversnug.service;
 import edu.sjsu.seekers.silversnug.dao.UserDAO;
 import edu.sjsu.seekers.silversnug.model.User;
+import edu.sjsu.seekers.silversnug.request.LoginRequest;
 import edu.sjsu.seekers.silversnug.request.UserSignupRequest;
 import edu.sjsu.seekers.silversnug.response.GenericResponse;
 import edu.sjsu.seekers.silversnug.response.UserResponse;
@@ -19,9 +20,10 @@ public class UserService {
     @Autowired
     UserDAO userDAO;
 
-    public void authenticate(String username) {
-        System.out.println("In service: " + username);
-        userDAO.authenticate(username);
+    public UserResponse authenticate(LoginRequest loginRequest) {
+        System.out.println("Authenticating: " + loginRequest.getUserName());
+        User user = userDAO.authenticate(loginRequest);
+        return getUserResponse(user);
     }
 
     public GenericResponse saveUser(UserSignupRequest userSignupRequest) {
@@ -48,17 +50,45 @@ public class UserService {
     }
 
     public UserResponse getUserByUserName(String userName) {
-        UserResponse response = new UserResponse();
-
         User user = userDAO.getUserByUserName(userName);
+        return getUserResponse(user);
+    }
+
+    private UserResponse getUserResponse(User user) {
+        UserResponse response = new UserResponse();
         if (null != user) {
-            response = new UserResponse(HttpStatus.OK.toString(),SUCCESS_GET,user.getUserName(),user.getUserId(),user.getEmailId(),
-                    user.getEmergencyContactNumber(),user.getFirstName(),user.getLastName(),user.getPassword(),
-                    user.getPhoneNumber(),user.getProfileImage(),user.getRole());
+            response = new UserResponse(HttpStatus.OK.toString(), SUCCESS_GET, user.getUserName(), user.getUserId(), user.getEmailId(),
+                    user.getEmergencyContactNumber(), user.getFirstName(), user.getLastName(), user.getPassword(),
+                    user.getPhoneNumber(), user.getProfileImage(), user.getRole());
         } else {
             response.setMessage(UNSUCCESSFUL_GET_USER);
         }
 
+        return response;
+    }
+
+    public GenericResponse editUser(UserSignupRequest editUserRequest) {
+        GenericResponse response = new GenericResponse();
+        User userOld = userDAO.getUserByUserName(editUserRequest.getUserName());
+        if (null == userOld) {
+            response.setMessage(USERNAME_DOES_NOT_EXISTS);
+            response.setStatus(HttpStatus.EXPECTATION_FAILED.toString());
+        }
+        else{
+            System.out.println("Updating user: " + editUserRequest.getUserName());
+            userOld.setEmailId(editUserRequest.getEmailId());
+            userOld.setEmergencyContactNumber(editUserRequest.getEmergencyContactNumber());
+            userOld.setFirstName(editUserRequest.getFirstName());
+            userOld.setLastName(editUserRequest.getLastName());
+            userOld.setPassword(editUserRequest.getPassword());
+            userOld.setProfileImage(editUserRequest.getProfileImage());
+            userOld.setRole(editUserRequest.getRole());
+            userOld.setPhoneNumber(editUserRequest.getPhoneNumber());
+            userDAO.saveUser(userOld);
+            response.setMessage(SUCCESS_GET);
+            response.setStatus(HttpStatus.OK.toString());
+
+        }
         return response;
     }
 }
