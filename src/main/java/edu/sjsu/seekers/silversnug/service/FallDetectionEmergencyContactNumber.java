@@ -15,6 +15,8 @@ public class FallDetectionEmergencyContactNumber {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
     FallDetectionDao fallDetectionDao;
 
 
