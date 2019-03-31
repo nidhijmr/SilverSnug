@@ -67,4 +67,12 @@ public class UserDAO {
 	}
 
 
+
+	public void deleteUser(User user) {
+		AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
+		DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
+		System.out.println("Deleting: " + user.getUserName()  + " at " + sdf.format(Calendar.getInstance().getTime()));
+		mapper.delete(user);
+	}
+
 }
