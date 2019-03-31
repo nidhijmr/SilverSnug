@@ -17,31 +17,37 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <java.version>1.8</java.version>
   </properties>
-
   <dependencies>
-    		<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-test</artifactId>
+          <scope>test</scope>
+      </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+          <dependency>
+              <groupId>com.amazonaws</groupId>
+              <artifactId>aws-java-sdk</artifactId>
+              <version>1.11.315</version>
+          </dependency>
 
-      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
-      <dependency>
-          <groupId>com.amazonaws</groupId>
-          <artifactId>aws-java-sdk</artifactId>
-          <version>1.11.315</version>
-      </dependency>
 
-      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
-      <dependency>
-          <groupId>com.amazonaws</groupId>
-          <artifactId>aws-java-sdk-dynamodb</artifactId>
-          <version>1.11.315</version>
-      </dependency>
+        <dependency>
+              <groupId>com.amazonaws</groupId>
+              <artifactId>aws-java-sdk-dynamodb</artifactId>
+              <version>1.11.315</version>
+        </dependency>
+
+
 
   </dependencies>
   <build>
