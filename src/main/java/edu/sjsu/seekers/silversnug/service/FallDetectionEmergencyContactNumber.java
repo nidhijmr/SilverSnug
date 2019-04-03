@@ -20,17 +20,17 @@ public class FallDetectionEmergencyContactNumber {
     FallDetectionDao fallDetectionDao;
 
 
-    public FallDetectionEmergencyContactResponse getEmergencyContactNumber(String userName)
+    public FallDetectionEmergencyContactResponse getEmergencyContactNumber(String userId)
     {
         FallDetectionEmergencyContactResponse response = new FallDetectionEmergencyContactResponse();
 
         String EmergencyContactNumber = "";
         System.out.println("Inside Emergerncy Contact number service");
-        User user = fallDetectionDao.getEmergencyContactNumber(userName);
+        User user = fallDetectionDao.getEmergencyContactNumber(userId);
 
         if(user!=null)
         {
-            response.setUserName(userName);
+            response.setUserId(userId);
             response.setEmergencyContactNumber(user.getEmergencyContactNumber());
 
         }

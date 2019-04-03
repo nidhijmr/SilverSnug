@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class EditPhotoRequest implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    private String userName;
+    private String userId;
     private String photo;
     private String photoName;
     private String contactNumber;
@@ -22,12 +22,12 @@ public class EditPhotoRequest implements Serializable{
         this.contactNumber = contactNumber;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPhoto() {
@@ -57,7 +57,7 @@ public class EditPhotoRequest implements Serializable{
     @Override
     public String toString() {
         return "PhotoGalleryRequest{" +
-                "userName='" + userName + '\'' +
+                "userId='" + userId + '\'' +
                 ", photo='" + photo + '\'' +
                 ", photoName='" + photoName + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +

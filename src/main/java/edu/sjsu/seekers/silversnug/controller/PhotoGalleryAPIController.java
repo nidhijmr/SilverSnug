@@ -24,9 +24,9 @@ public class PhotoGalleryAPIController {
     }
 
     @GetMapping("/SilverSnug/PhotoGallery/getPhotoGallery")
-    public PhotoGalleryResponse getPhotoGallery(String userName)
+    public PhotoGalleryResponse getPhotoGallery(String userId)
     {
-        return photoGalleryService.getPhotoGalleryByUserName(userName);
+        return photoGalleryService.getPhotoGalleryByUserId(userId);
     }
 
     @PostMapping("/SilverSnug/PhotoGallery/deletePhoto")

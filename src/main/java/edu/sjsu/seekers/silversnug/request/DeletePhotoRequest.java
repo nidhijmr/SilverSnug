@@ -6,26 +6,26 @@ public class DeletePhotoRequest implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private String photoId;
-    private String userName;
+    private String userId;
 
     public DeletePhotoRequest()
     {
 
     }
 
-    public DeletePhotoRequest(String userName, String photoId)
+    public DeletePhotoRequest(String userId, String photoId)
     {
-        this.userName = userName;
+        this.userId = userId;
         this.photoId =  photoId;
     }
 
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPhotoId() {
@@ -39,7 +39,7 @@ public class DeletePhotoRequest implements Serializable{
     @Override
     public String toString() {
         return "PhotoGalleryRequest{" +
-                "userName='" + userName + '\'' +
+                "userId='" + userId + '\'' +
                 ", photoId='" + photoId + '\'' +
                 '}';
     }
