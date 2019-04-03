@@ -23,7 +23,7 @@ public class PhotoGalleryService {
     {
         PhotoGallery photoGallery = new PhotoGallery();
         photoGallery.setPhotoId(request.getPhotoId());
-        photoGallery.setUserName(request.getUserName());
+        photoGallery.setUserId(request.getUserId());
         photoGallery.setPhoto(request.getPhoto());
         photoGallery.setPhotoName(request.getPhotoName());
         photoGallery.setContactNumber(request.getContactNumber());
@@ -37,15 +37,15 @@ public class PhotoGalleryService {
     }
 
 
-    public PhotoGalleryResponse getPhotoGalleryByUserName(String userName)
+    public PhotoGalleryResponse getPhotoGalleryByUserId(String userId)
     {
         PhotoGalleryResponse response = new PhotoGalleryResponse();
 
-        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserName(userName);
+        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserId(userId);
         if(null!=photoGallery)
         {
             response.setPhotoId(photoGallery.getPhotoId());
-            response.setUserName(photoGallery.getUserName());
+            response.setUserId(photoGallery.getUserId());
             response.setPhoto(photoGallery.getPhoto());
             response.setPhotoName(photoGallery.getPhotoName());
             response.setContactNumber(photoGallery.getContactNumber());
@@ -64,9 +64,9 @@ public class PhotoGalleryService {
     {
         GenericResponse response = new GenericResponse();
 
-        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserName(request.getUserName());
+        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserId(request.getUserId());
         if(null!=photoGallery) {
-            photoGalleryDao.deletePhoto(request.getUserName(), request.getPhotoId());
+            photoGalleryDao.deletePhoto(request.getUserId(), request.getPhotoId());
 
             response.setMessage(SUCCESS);
             response.setStatus(HttpStatus.OK.toString());
@@ -83,7 +83,7 @@ public class PhotoGalleryService {
     {
         GenericResponse response = new GenericResponse();
 
-        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserName(request.getUserName());
+        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserId(request.getUserId());
         if(null!=photoGallery) {
             photoGalleryDao.editPhoto(request);
 

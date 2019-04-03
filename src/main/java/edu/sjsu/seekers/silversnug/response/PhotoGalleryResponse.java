@@ -4,7 +4,7 @@ public class PhotoGalleryResponse extends GenericResponse {
 
         private static final long serialVersionUID = 1L;
         private String photoId;
-        private String userName;
+        private String userId;
         private String photo;
         private String photoName;
         private String contactNumber;
@@ -14,10 +14,10 @@ public class PhotoGalleryResponse extends GenericResponse {
 
         }
 
-        public PhotoGalleryResponse(String photoId, String userName, String photo, String photoName, String contactNumber)
+        public PhotoGalleryResponse(String photoId, String userId, String photo, String photoName, String contactNumber)
         {
             this.photoId = photoId;
-            this.userName = userName;
+            this.userId = userId;
             this.photo = photo;
             this.photoName= photoName;
             this.contactNumber = contactNumber;
@@ -31,12 +31,12 @@ public class PhotoGalleryResponse extends GenericResponse {
             this.photoId = photoId;
         }
 
-        public String getUserName() {
-            return userName;
+        public String getUserId() {
+            return userId;
         }
 
-        public void setUserName(String userName) {
-            this.userName = userName;
+        public void setUserId(String userId) {
+            this.userId = userId;
         }
 
         public String getPhoto() {
@@ -67,7 +67,7 @@ public class PhotoGalleryResponse extends GenericResponse {
         public String toString() {
             return "PhotoGalleryResponse{" +
                     "photoId='" + photoId + '\'' +
-                    ", userName='" + userName + '\'' +
+                    ", userId='" + userId + '\'' +
                     ", photo='" + photo + '\'' +
                     ", photoName='" + photoName + '\'' +
                     ", contactNumber='" + contactNumber + '\'' +
