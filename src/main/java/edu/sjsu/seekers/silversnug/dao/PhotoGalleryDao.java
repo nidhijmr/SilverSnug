@@ -27,15 +27,15 @@ public class PhotoGalleryDao {
         mapper.save(photoGallery);
     }
 
-    public PhotoGallery getPhotoGalleryByUserName( String userName)
+    public PhotoGallery getPhotoGalleryByUserId( String userId)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
         Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userName", new AttributeValue().withS(userName));
+        values.put(":userId", new AttributeValue().withS(userId));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userName = :userName").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
 
         List<PhotoGallery> photogallery = mapper.scan(PhotoGallery.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(photogallery)) {
@@ -44,16 +44,16 @@ public class PhotoGalleryDao {
         return null;
     }
 
-    public void deletePhoto( String userName, String photoId)
+    public void deletePhoto( String userId, String photoId)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
         Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userName", new AttributeValue().withS(userName));
+        values.put(":userId", new AttributeValue().withS(userId));
         values.put(":photoId", new AttributeValue().withS(photoId));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userName = :userName and photoId = :photoId").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId and photoId = :photoId").withExpressionAttributeValues(values);
 
         List<PhotoGallery> photogallery = mapper.scan(PhotoGallery.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(photogallery)) {
@@ -68,9 +68,9 @@ public class PhotoGalleryDao {
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
         Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userName", new AttributeValue().withS(request.getUserName()));
+        values.put(":userId", new AttributeValue().withS(request.getUserId()));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userName = :userName").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
 
         List<PhotoGallery> photogallery = mapper.scan(PhotoGallery.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(photogallery)) {

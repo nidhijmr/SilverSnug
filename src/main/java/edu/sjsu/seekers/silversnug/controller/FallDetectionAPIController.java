@@ -14,10 +14,10 @@ public class FallDetectionAPIController {
     FallDetectionEmergencyContactNumber fallDetectionEmergencyContactNumber;
 
     @GetMapping("/SilverSnug/FallDetection/getEmergencyContact")
-    public FallDetectionEmergencyContactResponse getEmergencyContact(String userName)
+    public FallDetectionEmergencyContactResponse getEmergencyContact(String userId)
     {
-        System.out.println(userName);
-        return fallDetectionEmergencyContactNumber.getEmergencyContactNumber(userName);
+        System.out.println(userId);
+        return fallDetectionEmergencyContactNumber.getEmergencyContactNumber(userId);
 
     }
 

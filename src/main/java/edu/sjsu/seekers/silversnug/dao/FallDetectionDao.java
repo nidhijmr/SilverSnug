@@ -22,15 +22,15 @@ public class FallDetectionDao {
     DynamoDbClient dynamodbClient;
 
 
-    public User getEmergencyContactNumber(String userName)
+    public User getEmergencyContactNumber(String userId)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
         Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userName", new AttributeValue().withS(userName));
+        values.put(":userId", new AttributeValue().withS(userId));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userName = :userName").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
 
         List<User> user = mapper.scan(User.class, scanExpression);
         System.out.println("User " + user);

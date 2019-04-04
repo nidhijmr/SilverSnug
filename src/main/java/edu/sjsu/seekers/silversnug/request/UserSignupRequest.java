@@ -15,7 +15,7 @@ public class UserSignupRequest implements Serializable {
     private String profileImage;
     private String role;
 
-    public UserSignupRequest(String status, String message, String userName, String userId, String emailId, String emergencyContactNumber, String firstName, String lastName, String password, String phoneNumber, String profileImage, String role) {
+    public UserSignupRequest(String userName, String userId, String emailId, String emergencyContactNumber, String firstName, String lastName, String password, String phoneNumber, String profileImage, String role) {
 
         this.userName = userName;
         this.userId = userId;

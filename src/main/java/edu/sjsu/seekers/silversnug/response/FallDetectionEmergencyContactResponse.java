@@ -4,7 +4,7 @@ public class FallDetectionEmergencyContactResponse extends GenericResponse {
 
     private static final long serialVersionUID = 1L;
     private String emergencyContactNumber;
-    private String userName;
+    private String userId;
 
 
     public FallDetectionEmergencyContactResponse ()
@@ -12,10 +12,10 @@ public class FallDetectionEmergencyContactResponse extends GenericResponse {
 
     }
 
-    public FallDetectionEmergencyContactResponse(String username, String emergencyContactNumber)
+    public FallDetectionEmergencyContactResponse(String userId, String emergencyContactNumber)
     {
         this.emergencyContactNumber = emergencyContactNumber;
-        this.userName = username;
+        this.userId = userId;
     }
 
     public String getEmergencyContactNumber() {
@@ -26,19 +26,19 @@ public class FallDetectionEmergencyContactResponse extends GenericResponse {
         this.emergencyContactNumber = emergencyContactNumber;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @Override
     public String toString() {
         return "FallDetectionEmergencyContactResponse{" +
                 "emergencyContactNumber='" + emergencyContactNumber + '\'' +
-                ", userName='" + userName + '\'' +
+                ", userId='" + userId + '\'' +
                 '}';
     }
 }

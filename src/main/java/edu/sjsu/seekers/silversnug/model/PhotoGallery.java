@@ -7,7 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 @DynamoDBTable(tableName = "photogallery")
 public class PhotoGallery {
     private String photoId;
-    private String userName;
+    private String userId;
     private String photo;
     private String photoName;
     private String contactNumber;
@@ -17,10 +17,10 @@ public class PhotoGallery {
 
     }
 
-    public PhotoGallery(String photoId, String userName, String photo, String photoName, String contactNumber)
+    public PhotoGallery(String photoId, String userId, String photo, String photoName, String contactNumber)
     {
         this.photoId = photoId;
-        this.userName = userName;
+        this.userId = userId;
         this.photo = photo;
         this.photoName= photoName;
         this.contactNumber = contactNumber;
@@ -37,13 +37,13 @@ public class PhotoGallery {
     }
 
 
-    @DynamoDBAttribute(attributeName = "userName")
-    public String getUserName() {
-        return userName;
+    @DynamoDBAttribute(attributeName = "userId")
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @DynamoDBAttribute(attributeName = "photo")
