@@ -27,7 +27,7 @@ public class PhotoGalleryDao {
         mapper.save(photoGallery);
     }
 
-    public PhotoGallery getPhotoGalleryByUserId( String userId)
+    public PhotoGallery getPhotoGalleryByUserId(String userId)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
@@ -80,6 +80,8 @@ public class PhotoGalleryDao {
             photogallery.get(0).setPhotoName(request.getPhotoName());
             if(request.getContactNumber()!= null)
             photogallery.get(0).setContactNumber(request.getContactNumber());
+            if(request.getRelationship()!=null)
+                photogallery.get(0).setRelationship(request.getRelationship());
             mapper.save(photogallery.get(0));
         }
     }
