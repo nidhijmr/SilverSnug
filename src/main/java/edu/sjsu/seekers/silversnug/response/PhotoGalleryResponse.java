@@ -8,19 +8,21 @@ public class PhotoGalleryResponse extends GenericResponse {
         private String photo;
         private String photoName;
         private String contactNumber;
+        private String relationship;
 
         public PhotoGalleryResponse()
         {
 
         }
 
-        public PhotoGalleryResponse(String photoId, String userId, String photo, String photoName, String contactNumber)
+        public PhotoGalleryResponse(String photoId, String userId, String photo, String photoName, String contactNumber, String relationship)
         {
             this.photoId = photoId;
             this.userId = userId;
             this.photo = photo;
             this.photoName= photoName;
             this.contactNumber = contactNumber;
+            this.relationship = relationship;
         }
 
         public String getPhotoId() {
@@ -63,7 +65,15 @@ public class PhotoGalleryResponse extends GenericResponse {
             this.contactNumber = contactNumber;
         }
 
-        @Override
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
+    @Override
         public String toString() {
             return "PhotoGalleryResponse{" +
                     "photoId='" + photoId + '\'' +
@@ -71,6 +81,7 @@ public class PhotoGalleryResponse extends GenericResponse {
                     ", photo='" + photo + '\'' +
                     ", photoName='" + photoName + '\'' +
                     ", contactNumber='" + contactNumber + '\'' +
+                    ", relationship='" + relationship + '\'' +
                     '}';
         }
 }
