@@ -53,21 +53,12 @@ public class PillBoxDao {
         }
 
 
-    public void deletePill( String userId, String pillboxId)
+    public void deletePill(String pillboxId)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
-
-        Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userId", new AttributeValue().withS(userId));
-        values.put(":pillBoxId", new AttributeValue().withS(pillboxId));
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userId = :userId and pillBoxId = :pillBoxId").withExpressionAttributeValues(values);
-
-        List<PillBox> pillbox = mapper.scan(PillBox.class, scanExpression);
-        if (!CollectionUtils.isNullOrEmpty(pillbox)) {
-            mapper.delete(pillbox.get(0));
-        }
+        PillBox obj = mapper.load(PillBox.class, pillboxId);
+        mapper.delete(obj);
 
     }
 
@@ -93,6 +84,26 @@ public class PillBoxDao {
                 pillBox.get(0).setDosage(request.getDosage());
             mapper.save(pillBox.get(0));
         }
+    }
+
+    public String getPillIdByPillName(String userId,String medicineName) {
+        AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
+        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
+
+        Map<String, AttributeValue> values = new HashMap<>();
+        values.put(":userId", new AttributeValue().withS(userId));
+        values.put(":medicineName", new AttributeValue().withS(medicineName));
+
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("userId = :userId and medicineName = :medicineName")
+                .withExpressionAttributeValues(values);
+
+        List<PillBox> pillId = mapper.scan(PillBox.class, scanExpression);
+        if (!CollectionUtils.isNullOrEmpty(pillId)) {
+            System.out.println(pillId.get(0).getPillBoxId());
+            return pillId.get(0).getPillBoxId();
+        }
+        return null;
     }
     }
 

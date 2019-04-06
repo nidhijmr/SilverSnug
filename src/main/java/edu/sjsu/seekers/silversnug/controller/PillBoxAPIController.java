@@ -31,9 +31,9 @@ public class PillBoxAPIController {
 
         @PostMapping("/SilverSnug/PillBox/deletePill")
         @ResponseBody
-        public GenericResponse deletepill(@RequestBody DeletePillRequest request)
+        public GenericResponse deletepill(String userId,String medicineName)
         {
-            return pillBoxService.deletePill(request);
+            return pillBoxService.deletePill(userId,medicineName);
         }
 
     @PostMapping("/SilverSnug/PillBox/editPill")
