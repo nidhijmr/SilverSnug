@@ -5,35 +5,33 @@ import java.io.Serializable;
 public class PhotoGalleryRequest implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    //private String photoId;
+    private String photoId;
     private String userId;
     private String photo;
     private String photoName;
     private String contactNumber;
-    private String relationship;
 
     public PhotoGalleryRequest()
     {
 
     }
 
-    public PhotoGalleryRequest(String userId, String photo, String photoName, String contactNumber, String relationship)
+    public PhotoGalleryRequest(String photoId, String userId, String photo, String photoName, String contactNumber)
     {
-        //this.photoId = photoId;
+        this.photoId = photoId;
         this.userId = userId;
         this.photo = photo;
         this.photoName= photoName;
         this.contactNumber = contactNumber;
-        this.relationship = relationship;
     }
 
-    // public String getPhotoId() {
-    //    return photoId;
-   // }
+    public String getPhotoId() {
+        return photoId;
+    }
 
-   // public void setPhotoId(String photoId) {
-    //    this.photoId = photoId;
-   // }
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
 
     public String getUserId() {
         return userId;
@@ -67,23 +65,14 @@ public class PhotoGalleryRequest implements Serializable{
         this.contactNumber = contactNumber;
     }
 
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
-
     @Override
     public String toString() {
         return "PhotoGalleryRequest{" +
-               // "photoId='" + photoId + '\'' +
+                "photoId='" + photoId + '\'' +
                 ", userId='" + userId + '\'' +
                 ", photo='" + photo + '\'' +
                 ", photoName='" + photoName + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
-                ", relationship='" + relationship + '\'' +
                 '}';
     }
 }
