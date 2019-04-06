@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 public class PhotoGalleryControllerTest {
 
-    public static final String USER_ID="680cdb82-c044-4dd1-ae84-1a15e54ab502";
+  /*  public static final String USER_ID="680cdb82-c044-4dd1-ae84-1a15e54ab502";
     @MockBean
     PhotoGalleryService photoGalleryService;
 
@@ -92,6 +92,6 @@ public class PhotoGalleryControllerTest {
 
         assertEquals(genericResponseFinal.getMessage(),genericResponse.getMessage());
         assertEquals(genericResponseFinal.getStatus(),genericResponse.getStatus());
-    }
+    }*/
 
 }

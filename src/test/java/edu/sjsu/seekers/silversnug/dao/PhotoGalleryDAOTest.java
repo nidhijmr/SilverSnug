@@ -52,7 +52,7 @@ public class PhotoGalleryDAOTest {
         }
     }
 
-    @Test
+   /* @Test
     public void getPhotoGalleryByUserId()
     {
         PhotoGallery photoGalleryExisting  = photoGalleryDao.getPhotoGalleryByUserId(USER_ID);
@@ -64,7 +64,7 @@ public class PhotoGalleryDAOTest {
         else{
             fail("test case failed");
         }
-    }
+    }*/
 
 }
 
