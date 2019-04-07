@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 public class PhotoGalleryControllerTest {
 
-  /*  public static final String USER_ID="680cdb82-c044-4dd1-ae84-1a15e54ab502";
+   public static final String USER_ID="680cdb82-c044-4dd1-ae84-1a15e54ab502";
     @MockBean
     PhotoGalleryService photoGalleryService;
 
@@ -40,7 +40,7 @@ public class PhotoGalleryControllerTest {
     public void setup()
     {
         System.out.println("Setting up test");
-       photoGalleryResponse = new PhotoGalleryResponse("a07c639f-579a-4a08-b512-1dd88a6a274e", "a07c639f-579a-4a08-b512-1dd88a6a274e", "s3://test/location","Sindhu","+14081234567", "Friend" );
+      // photoGalleryResponse = new PhotoGalleryResponse("a07c639f-579a-4a08-b512-1dd88a6a274e", "a07c639f-579a-4a08-b512-1dd88a6a274e", "s3://test/location","Sindhu","+14081234567", "Friend" );
         genericResponse = new GenericResponse("200","success");
         photoGalleryAPIController = new PhotoGalleryAPIController();
         photoGalleryAPIController.photoGalleryService = mock(PhotoGalleryService.class);
@@ -66,8 +66,8 @@ public class PhotoGalleryControllerTest {
 
         photoGalleryResponseFinal= photoGalleryAPIController.getPhotoGallery(USER_ID);
 
-        assertEquals(photoGalleryResponseFinal.getContactNumber(),photoGalleryResponse.getContactNumber());
-        assertEquals(photoGalleryResponseFinal.getPhotoName(),photoGalleryResponse.getPhotoName());
+        assertEquals(photoGalleryResponseFinal.getPhotos().get(0).getContactNumber(),photoGalleryResponse.getPhotos().get(0).getContactNumber());
+        assertEquals(photoGalleryResponseFinal.getPhotos().get(0).getPhotoName(),photoGalleryResponse.getPhotos().get(0).getPhotoName());
 
     }
 
@@ -92,6 +92,6 @@ public class PhotoGalleryControllerTest {
 
         assertEquals(genericResponseFinal.getMessage(),genericResponse.getMessage());
         assertEquals(genericResponseFinal.getStatus(),genericResponse.getStatus());
-    }*/
+    }
 
 }
