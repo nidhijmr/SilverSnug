@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 
 public class PhotoGalleryServiceTest {
 
-   /* public static final String USER_ID="680cdb82-c044-4dd1-ae84-1a15e54ab502";
+    public static final String USER_ID="680cdb82-c044-4dd1-ae84-1a15e54ab502";
 
     PhotoGalleryService photoGalleryService;
 
@@ -63,11 +63,11 @@ public class PhotoGalleryServiceTest {
     @Test
     public void getPhotoGalleryByUserId()
     {
-        when(photoGalleryService.photoGalleryDao.getPhotoGalleryByUserId(USER_ID)).thenReturn(photoGallery);
+        when(photoGalleryService.photoGalleryDao.getPhotoGalleryByUserId(USER_ID)).thenReturn(photoGalleryResponse);
         photoGalleryResponseFinal = photoGalleryService.getPhotoGalleryByUserId(USER_ID);
 
-        assertEquals(photoGalleryResponseFinal.getContactNumber(),photoGallery.getContactNumber());
-        assertEquals(photoGalleryResponseFinal.getPhotoName(), photoGallery.getPhotoName());
+        assertEquals(photoGalleryResponseFinal.getPhotos().get(0).getContactNumber(),photoGallery.getContactNumber());
+        assertEquals(photoGalleryResponseFinal.getPhotos().get(0).getPhotoName(), photoGallery.getPhotoName());
     }
 
     @Test
@@ -80,5 +80,5 @@ public class PhotoGalleryServiceTest {
         assertEquals(genericResponse.getMessage(),USER_ADD_SUCCESS);
         assertEquals(genericResponse.getStatus(), HttpStatus.CREATED.toString());
 
-    }*/
+    }
 }

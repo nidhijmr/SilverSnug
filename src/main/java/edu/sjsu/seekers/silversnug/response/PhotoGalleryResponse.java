@@ -1,9 +1,45 @@
 package edu.sjsu.seekers.silversnug.response;
 
+import edu.sjsu.seekers.silversnug.model.PhotoGallery;
+
+import java.util.List;
+
 public class PhotoGalleryResponse extends GenericResponse {
 
         private static final long serialVersionUID = 1L;
-        private String photoId;
+
+    private List<PhotoGallery> photos;
+
+    public PhotoGalleryResponse(){
+
+    }
+
+    public PhotoGalleryResponse(List<PhotoGallery> photos) {
+        super();
+        this.photos = photos;
+    }
+
+    public List<PhotoGallery> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<PhotoGallery> photos) {
+        this.photos = photos;
+    }
+
+    @Override
+    public String toString() {
+        return "PhotoGalleryResponse{" +
+                "PhootGallery=" + photos +
+                ", status='" + status + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
+
+      //  private List<PhotoGallery> photos;
+
+      /*  private String photoId;
         private String userId;
         private String photo;
         private String photoName;
@@ -15,7 +51,7 @@ public class PhotoGalleryResponse extends GenericResponse {
 
         }
 
-        public PhotoGalleryResponse(String photoId, String userId, String photo, String photoName, String contactNumber, String relationship)
+       public PhotoGalleryResponse(String photoId, String userId, String photo, String photoName, String contactNumber, String relationship)
         {
             this.photoId = photoId;
             this.userId = userId;
@@ -24,6 +60,7 @@ public class PhotoGalleryResponse extends GenericResponse {
             this.contactNumber = contactNumber;
             this.relationship = relationship;
         }
+
 
         public String getPhotoId() {
             return photoId;
@@ -83,5 +120,7 @@ public class PhotoGalleryResponse extends GenericResponse {
                     ", contactNumber='" + contactNumber + '\'' +
                     ", relationship='" + relationship + '\'' +
                     '}';
-        }
+        } */
+
+
 }

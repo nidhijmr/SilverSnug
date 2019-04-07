@@ -3,6 +3,7 @@ package edu.sjsu.seekers.silversnug.dao;
 
 import edu.sjsu.seekers.silversnug.model.PhotoGallery;
 import edu.sjsu.seekers.silversnug.request.PhotoGalleryRequest;
+import edu.sjsu.seekers.silversnug.response.PhotoGalleryResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,12 @@ public class PhotoGalleryDAOTest {
         newPhotoGallery = new PhotoGallery("a07c639f-579a-4a08-b512-1dd88a6a274e","680cdb82-c044-4dd1-ae84-1a15e54ab502","s3://test/location","Sindhu","+14081234567", "Friend");
         photoGalleryDao.save(newPhotoGallery);
 
-        PhotoGallery photoGalleryExisting = photoGalleryDao.getPhotoGalleryByUserId(USER_ID);
+        PhotoGalleryResponse photoGalleryExisting = photoGalleryDao.getPhotoGalleryByUserId(USER_ID);
         if(photoGalleryExisting!=null)
         {
-            System.out.println("Photo saved successfully" + photoGalleryExisting.getPhotoId());
+            System.out.println("Photo saved successfully" + photoGalleryExisting.getPhotos().get(0).getPhotoId());
             photoGalleryDao.deletePhoto(USER_ID,"a07c639f-579a-4a08-b512-1dd88a6a274e");
-            assertEquals(photoGalleryExisting.getContactNumber(),newPhotoGallery.getContactNumber());
+            assertEquals(photoGalleryExisting.getPhotos().get(0).getContactNumber(),newPhotoGallery.getContactNumber());
         }
         else
         {
@@ -52,19 +53,20 @@ public class PhotoGalleryDAOTest {
         }
     }
 
-   /* @Test
+    @Test
     public void getPhotoGalleryByUserId()
     {
-        PhotoGallery photoGalleryExisting  = photoGalleryDao.getPhotoGalleryByUserId(USER_ID);
+        PhotoGalleryResponse photoGalleryExisting  = photoGalleryDao.getPhotoGalleryByUserId(USER_ID);
 
         if(photoGalleryExisting != null) {
-            System.out.println("Photos fetched successfully: " + photoGalleryExisting.getContactNumber());
-            assertEquals(photoGalleryExisting.getUserId(), USER_ID);
+           System.out.println("Photos fetched successfully: " + photoGalleryExisting.getPhotos().get(0).getContactNumber());
+          // assertEquals(photoGalleryExisting.getUserId(), USER_ID);
+            assertEquals(photoGalleryExisting.getPhotos().get(0).getUserId(), USER_ID);
         }
         else{
             fail("test case failed");
         }
-    }*/
+    }
 
 }
 

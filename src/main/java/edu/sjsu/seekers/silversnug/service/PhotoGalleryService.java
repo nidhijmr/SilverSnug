@@ -39,21 +39,21 @@ public class PhotoGalleryService {
         return response;
     }
 
-
     public PhotoGalleryResponse getPhotoGalleryByUserId(String userId)
     {
         PhotoGalleryResponse response = new PhotoGalleryResponse();
 
-        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserId(userId);
-        if(null!=photoGallery)
+        PhotoGalleryResponse photoGalleryResponse = photoGalleryDao.getPhotoGalleryByUserId(userId);
+        if(null!=photoGalleryResponse)
         {
-            response.setPhotoId(photoGallery.getPhotoId());
+            response= photoGalleryResponse;
+            /*response.setPhotoId(photoGallery.getPhotoId());
             response.setUserId(photoGallery.getUserId());
             response.setPhoto(photoGallery.getPhoto());
             response.setPhotoName(photoGallery.getPhotoName());
             response.setContactNumber(photoGallery.getContactNumber());
             response.setRelationship(photoGallery.getRelationship());
-            response.setMessage(SUCCESS);
+            response.setMessage(SUCCESS);*/
         }
         else
         {
@@ -61,15 +61,14 @@ public class PhotoGalleryService {
         }
 
         return response;
-
     }
 
     public GenericResponse deletePhoto(DeletePhotoRequest request)
     {
         GenericResponse response = new GenericResponse();
 
-        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserId(request.getUserId());
-        if(null!=photoGallery) {
+        PhotoGalleryResponse photoGalleryResponse = photoGalleryDao.getPhotoGalleryByUserId(request.getUserId());
+        if(null!=photoGalleryResponse) {
             photoGalleryDao.deletePhoto(request.getUserId(), request.getPhotoId());
 
             response.setMessage(SUCCESS);
@@ -87,8 +86,8 @@ public class PhotoGalleryService {
     {
         GenericResponse response = new GenericResponse();
 
-        PhotoGallery photoGallery = photoGalleryDao.getPhotoGalleryByUserId(request.getUserId());
-        if(null!=photoGallery) {
+        PhotoGalleryResponse photoGalleryResponse = photoGalleryDao.getPhotoGalleryByUserId(request.getUserId());
+        if(null!=photoGalleryResponse) {
             photoGalleryDao.editPhoto(request);
 
             response.setMessage(SUCCESS);
