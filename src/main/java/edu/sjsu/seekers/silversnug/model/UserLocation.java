@@ -7,50 +7,50 @@ import java.util.UUID;
 
 @DynamoDBTable(tableName = "userlocation")
 public class UserLocation{
-    private String Id;
-    private String anomalyscore;
-    private String datetime;
+    private String id;
+    private String anomalyScore;
+    private String dateTime;
     private String latitude;
     private String longitude;
-    private String patientusername;
+    private String patientUsername;
 
     public UserLocation(){}
 
-    public UserLocation(String Id, String anomalyscore, String datetime, String latitude, String longitude, String patientusername) {
-        this.Id = Id;
-        this.anomalyscore = anomalyscore;
-        this.datetime = datetime;
+    public UserLocation(String Id, String dateTime, String anomalyScore, String latitude, String longitude, String patientusername) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.anomalyScore = anomalyScore;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.patientusername = patientusername;
+        this.patientUsername = patientusername;
     }
 
 
     @DynamoDBHashKey(attributeName = "ID")
     public String getId(){
-        return Id;
+        return id;
     }
 
     public void setId(String Id){
-        this.Id=Id;
+        this.id=Id;
     }
 
     @DynamoDBAttribute(attributeName = "AnomalyScore")
     public String getAnomalyScore(){
-        return anomalyscore;
+        return anomalyScore;
     }
 
-    public void setAnomalyScore(String anomalyscore){
-        this.anomalyscore=anomalyscore;
+    public void setAnomalyScore(String anomalyScore){
+        this.anomalyScore=anomalyScore;
     }
 
     @DynamoDBAttribute(attributeName = "DateTime")
     public String getDateTime(){
-        return datetime;
+        return dateTime;
     }
 
     public void setDateTime(String datetime){
-        this.datetime=datetime;
+        this.dateTime=datetime;
     }
 
     @DynamoDBAttribute(attributeName = "Latitude")
@@ -72,23 +72,23 @@ public class UserLocation{
     }
 
     @DynamoDBAttribute(attributeName = "Patient_UserName")
-    public String getUsername(){
-        return patientusername;
+    public String getPatientUsername(){
+        return patientUsername;
     }
 
-    public void setUsername(String patientusername){
-        this.patientusername=patientusername;
+    public void setPatientUsername(String patientUsername){
+        this.patientUsername=patientUsername;
     }
 
     @Override
     public String toString() {
         return "UserLocation{" +
-                "Id='" + Id + '\'' +
-                ", anomalyscore='" + anomalyscore + '\'' +
-                ", datetime='" + datetime + '\'' +
+                "Id='" + id + '\'' +
+                ", anomalyscore='" + anomalyScore + '\'' +
+                ", datetime='" + dateTime + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
-                ", patientusername='" + patientusername + '\'' +
+                ", patientusername='" + patientUsername + '\'' +
                 '}';
     }
 }
