@@ -24,7 +24,7 @@ public class UserLocationController {
 
 
     @GetMapping("/SilverSnug/User/GetUserLocations")
-    public List<UserLocationResponse> getUserLocations(@RequestParam(value="userName") String userName ) {
+    public UserLocationResponse getUserLocations(@RequestParam(value="userName") String userName ) {
         return userLocationService.getUserLocations(userName);
     }
 }

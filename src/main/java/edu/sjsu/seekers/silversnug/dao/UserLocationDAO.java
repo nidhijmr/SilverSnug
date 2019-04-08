@@ -8,7 +8,9 @@ import com.amazonaws.util.CollectionUtils;
 import edu.sjsu.seekers.silversnug.model.User;
 import edu.sjsu.seekers.silversnug.model.UserLocation;
 import edu.sjsu.seekers.silversnug.request.LoginRequest;
+import edu.sjsu.seekers.silversnug.response.UserLocationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.text.SimpleDateFormat;
@@ -22,13 +24,14 @@ public class UserLocationDAO {
 
     @Autowired
     DynamoDbClient dynamodbClient;
+    private final String SUCCESS = "SUCCESS";
 
     public DynamoDBMapper dynamoDBMapper;
     List<UserLocation> userlatLong;
     String[] todaydateArray;
     String userName;
 
-    public List<UserLocation> getUserLocations(String userName) {
+    public UserLocationResponse getUserLocations(String userName) {
 
 
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
@@ -38,8 +41,8 @@ public class UserLocationDAO {
         Map<String, AttributeValue> userVal = new HashMap<>();
         userVal.put(":Patient_UserName", new AttributeValue().withS(userName));
         //userValues.put(":Datetym", new AttributeValue().withS("Mon Apr 09 20:03:16 PDT 2018"));
-        userVal.put(":Datetym", new AttributeValue().withS(todaydateArray[0]+ " "+ todaydateArray[1] + " " + todaydateArray[2]));
-         //userVal.put(":Datetym", new AttributeValue().withS("Mon Apr 09 "));
+        //userVal.put(":Datetym", new AttributeValue().withS(todaydateArray[0]+ " "+ todaydateArray[1] + " " + todaydateArray[2]));
+         userVal.put(":Datetym", new AttributeValue().withS("Fri Mar 29 "));
 
         Map<String, String> userVal2 = new HashMap<>();
         userVal2.put("#Dt", "DateTime");
@@ -54,12 +57,14 @@ public class UserLocationDAO {
             e.printStackTrace();
         }
 
-        if (userlatLong.isEmpty()) {
+        if (userlatLong != null && !userlatLong.isEmpty()) {
+            System.out.println("****Data Fetched****" + userlatLong.get(0).toString() + userlatLong.get(1).toString());
+            UserLocationResponse userLocationResponse = new UserLocationResponse();
+            userLocationResponse.setMessage(SUCCESS);
+            userLocationResponse.setStatus(HttpStatus.OK.toString());
+            userLocationResponse.setUserLocations(userlatLong);
+            return userLocationResponse;
         }
-        System.out.println("****Data Fetched****" + userlatLong.get(0).toString() + userlatLong.get(1).toString());
-
-        return userlatLong;
+        return null;
     }
-
-
 }

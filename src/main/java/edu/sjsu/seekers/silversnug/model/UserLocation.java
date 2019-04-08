@@ -3,9 +3,11 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
+import java.util.UUID;
+
 @DynamoDBTable(tableName = "userlocation")
 public class UserLocation{
-    private String id;
+    private String Id;
     private String anomalyscore;
     private String datetime;
     private String latitude;
@@ -14,8 +16,8 @@ public class UserLocation{
 
     public UserLocation(){}
 
-    public UserLocation(String id, String anomalyscore, String datetime, String latitude, String longitude, String patientusername) {
-        this.id = id;
+    public UserLocation(String Id, String anomalyscore, String datetime, String latitude, String longitude, String patientusername) {
+        this.Id = Id;
         this.anomalyscore = anomalyscore;
         this.datetime = datetime;
         this.latitude = latitude;
@@ -24,13 +26,13 @@ public class UserLocation{
     }
 
 
-    @DynamoDBHashKey(attributeName = "userlocationId")
-    public String getID(){
-        return id;
+    @DynamoDBHashKey(attributeName = "ID")
+    public String getId(){
+        return Id;
     }
 
-    public void setID(String id){
-        this.id=id;
+    public void setId(String Id){
+        this.Id=Id;
     }
 
     @DynamoDBAttribute(attributeName = "AnomalyScore")
@@ -81,7 +83,7 @@ public class UserLocation{
     @Override
     public String toString() {
         return "UserLocation{" +
-                "id='" + id + '\'' +
+                "Id='" + Id + '\'' +
                 ", anomalyscore='" + anomalyscore + '\'' +
                 ", datetime='" + datetime + '\'' +
                 ", latitude='" + latitude + '\'' +
