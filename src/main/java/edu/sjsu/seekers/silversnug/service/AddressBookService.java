@@ -7,14 +7,15 @@ import edu.sjsu.seekers.silversnug.response.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import static edu.sjsu.seekers.silversnug.util.Constants.*;
 
-import java.util.Collections;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class AddressBookService {
-
-    private final String SUCCESS = "SUCCESS";
 
     @Autowired
     AddressBookDao addressBookDao;
@@ -24,7 +25,7 @@ public class AddressBookService {
         getAddressBookDao().authenticate(username);
     }
 
-    public GenericResponse saveAddress(AddressBookRequest request) {
+    public AddressBookResponse saveAddress(AddressBookRequest request) {
 
         String addressUUID = UUID.randomUUID().toString();
         AddressBook addressBook = new AddressBook();
@@ -35,8 +36,11 @@ public class AddressBookService {
         addressBook.setLongitude(request.getLongitude());
         getAddressBookDao().save(addressBook);
 
-        GenericResponse response = new GenericResponse();
-        response.setMessage(SUCCESS);
+        AddressBookResponse response = new AddressBookResponse();
+        List<AddressBook> addressBookList = new ArrayList<>();
+        addressBookList.add(addressBook);
+        response.setAddressBooks(addressBookList);
+        response.setMessage(SUCCESS_GET);
         response.setStatus(HttpStatus.OK.toString());
 
         return response;
@@ -49,7 +53,7 @@ public class AddressBookService {
         if (null != addressBookResponse) {
             response = addressBookResponse;
         } else {
-            response.setMessage("No address found for this User");
+            response.setMessage(UNSUCCESSFUL_GET_ADDRESS);
         }
 
         return response;
@@ -73,13 +77,13 @@ public class AddressBookService {
         GenericResponse response = new GenericResponse();
         String addressID = getAddressBookDao().getAddressIdByAddressName(userId,addressName);
         if(addressID!=null) {
-            getAddressBookDao().removeAddress(addressID);
-            response.setMessage(SUCCESS);
+            addressBookDao.removeAddress(addressID);
+            response.setMessage(SUCCESS_GET);
             response.setStatus(HttpStatus.OK.toString());
         }
 
         else {
-            response.setMessage("No address found for this User");
+            response.setMessage(UNSUCCESSFUL_GET_ADDRESS);
         }
 
         return response;

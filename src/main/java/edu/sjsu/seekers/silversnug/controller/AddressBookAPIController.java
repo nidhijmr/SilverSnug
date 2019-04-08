@@ -15,7 +15,7 @@ public class AddressBookAPIController {
 
     @PostMapping("/SilverSnug/Address/addAddress")
     @ResponseBody
-    public GenericResponse addAddress(@RequestBody AddressBookRequest request) {
+    public AddressBookResponse addAddress(@RequestBody AddressBookRequest request) {
         return addressBookService.saveAddress(request);
     }
 
