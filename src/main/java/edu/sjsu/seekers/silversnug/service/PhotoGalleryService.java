@@ -46,6 +46,7 @@ public class PhotoGalleryService {
         PhotoGalleryResponse photoGalleryResponse = photoGalleryDao.getPhotoGalleryByUserId(userId);
         if(null!=photoGalleryResponse)
         {
+            System.out.println("Response = " + photoGalleryResponse);
             response= photoGalleryResponse;
             /*response.setPhotoId(photoGallery.getPhotoId());
             response.setUserId(photoGallery.getUserId());

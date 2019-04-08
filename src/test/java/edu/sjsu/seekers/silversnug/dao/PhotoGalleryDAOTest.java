@@ -29,7 +29,7 @@ public class PhotoGalleryDAOTest {
     {
         photoGalleryDao = new PhotoGalleryDao();
         photoGalleryDao.dynamodbClient = new DynamoDbClient();
-        photoGalleryRequest = new PhotoGalleryRequest("680cdb82-c044-4dd1-ae84-1a15e54ab502", "s3://test/location","Sindhu","+14081234567", "Friend");
+        photoGalleryRequest = new PhotoGalleryRequest("680cdb82-c044-4dd1-ae84-1a15e54ab502", "https://s3.amazonaws.com/silversnugphotos/photos/18325499-c88c-4230-a27c-ef9122172a0f.png","Sindhu","+14081234567", "Friend");
 
     }
 
@@ -60,8 +60,7 @@ public class PhotoGalleryDAOTest {
 
         if(photoGalleryExisting != null) {
            System.out.println("Photos fetched successfully: " + photoGalleryExisting.getPhotos().get(0).getContactNumber());
-          // assertEquals(photoGalleryExisting.getUserId(), USER_ID);
-            assertEquals(photoGalleryExisting.getPhotos().get(0).getUserId(), USER_ID);
+           assertEquals(photoGalleryExisting.getPhotos().get(0).getUserId(), USER_ID);
         }
         else{
             fail("test case failed");
