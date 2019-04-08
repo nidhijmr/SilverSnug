@@ -9,5 +9,6 @@ public class Constants {
     public static final String PILL_ADD_SUCCESS = "pill added sucessfully";
     public static final String UNSUCCESSFUL_GET_PILL = "No pill added";
     public static final String UNSUCCESSFUL_PILL_USER = "pills not found for this User";
+    public static final String UNSUCCESSFUL_GET_ADDRESS = "No address found for this User";
     
 }

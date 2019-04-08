@@ -7,13 +7,14 @@ import edu.sjsu.seekers.silversnug.response.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import static edu.sjsu.seekers.silversnug.util.Constants.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
 public class AddressBookService {
-
-    private final String SUCCESS = "SUCCESS";
 
     @Autowired
     AddressBookDao addressBookDao;
@@ -23,7 +24,7 @@ public class AddressBookService {
         addressBookDao.authenticate(username);
     }
 
-    public GenericResponse saveAddress(AddressBookRequest request) {
+    public AddressBookResponse saveAddress(AddressBookRequest request) {
 
         String addressUUID = UUID.randomUUID().toString();
         AddressBook addressBook = new AddressBook();
@@ -34,8 +35,11 @@ public class AddressBookService {
         addressBook.setLongitude(request.getLongitude());
         addressBookDao.save(addressBook);
 
-        GenericResponse response = new GenericResponse();
-        response.setMessage(SUCCESS);
+        AddressBookResponse response = new AddressBookResponse();
+        List<AddressBook> addressBookList = new ArrayList<>();
+        addressBookList.add(addressBook);
+        response.setAddressBooks(addressBookList);
+        response.setMessage(SUCCESS_GET);
         response.setStatus(HttpStatus.OK.toString());
 
         return response;
@@ -48,7 +52,7 @@ public class AddressBookService {
         if (null != addressBookResponse) {
             response = addressBookResponse;
         } else {
-            response.setMessage("No address found for this User");
+            response.setMessage(UNSUCCESSFUL_GET_ADDRESS);
         }
 
         return response;
@@ -60,12 +64,12 @@ public class AddressBookService {
         String addressID = addressBookDao.getAddressIdByAddressName(userId,addressName);
         if(addressID!=null) {
             addressBookDao.removeAddress(addressID);
-            response.setMessage(SUCCESS);
+            response.setMessage(SUCCESS_GET);
             response.setStatus(HttpStatus.OK.toString());
         }
 
         else {
-            response.setMessage("No address found for this User");
+            response.setMessage(UNSUCCESSFUL_GET_ADDRESS);
         }
 
         return response;

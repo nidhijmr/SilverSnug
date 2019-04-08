@@ -8,6 +8,7 @@ import edu.sjsu.seekers.silversnug.response.AddressBookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import static edu.sjsu.seekers.silversnug.util.Constants.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +16,6 @@ import java.util.Map;
 
 @Repository
 public class AddressBookDao {
-
-    private final String SUCCESS = "SUCCESS";
 
     @Autowired
     DynamoDbClient dynamodbClient;
@@ -44,7 +43,7 @@ public class AddressBookDao {
             AddressBookResponse addressBookResponse = new AddressBookResponse();
             addressBookResponse.setAddressBooks(addressbook);
             addressBookResponse.setStatus(HttpStatus.OK.toString());
-            addressBookResponse.setMessage(SUCCESS);
+            addressBookResponse.setMessage(SUCCESS_GET);
             return addressBookResponse;
         }
         return null;
