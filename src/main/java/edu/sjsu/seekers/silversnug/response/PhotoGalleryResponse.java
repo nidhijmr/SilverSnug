@@ -30,7 +30,7 @@ public class PhotoGalleryResponse extends GenericResponse {
     @Override
     public String toString() {
         return "PhotoGalleryResponse{" +
-                "PhootGallery=" + photos +
+                "photos=" + photos +
                 ", status='" + status + '\'' +
                 ", message='" + message + '\'' +
                 '}';
