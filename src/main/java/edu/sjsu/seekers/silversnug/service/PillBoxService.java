@@ -61,13 +61,13 @@ public class PillBoxService {
     }
 
 
-    public GenericResponse deletePill(DeletePillRequest request) {
+    public GenericResponse deletePill(String userId, String medicineName) {
 
         GenericResponse response = new GenericResponse();
 
-        PillBoxResponse pillBox = pillBoxDao.getPillByUserId(request.getUserId());
-        if(null!=pillBox) {
-            pillBoxDao.deletePill(request.getUserId(), request.getPillBoxId());
+        String pillId = pillBoxDao.getPillIdByPillName(userId,medicineName);
+        if(pillId!=null) {
+            pillBoxDao.deletePill(pillId);
 
             response.setMessage(SUCCESS);
             response.setStatus(HttpStatus.OK.toString());
@@ -100,5 +100,4 @@ public class PillBoxService {
         return response;
 
     }
-    }
-
+}

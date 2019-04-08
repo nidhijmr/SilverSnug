@@ -7,7 +7,9 @@ import com.amazonaws.util.CollectionUtils;
 import edu.sjsu.seekers.silversnug.model.AddressBook;
 import edu.sjsu.seekers.silversnug.model.PhotoGallery;
 import edu.sjsu.seekers.silversnug.request.EditPhotoRequest;
+import edu.sjsu.seekers.silversnug.response.PhotoGalleryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -20,6 +22,8 @@ public class PhotoGalleryDao {
     @Autowired
     DynamoDbClient dynamodbClient;
 
+    private final String SUCCESS = "SUCCESS";
+
     public void save(PhotoGallery photoGallery)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
@@ -27,7 +31,7 @@ public class PhotoGalleryDao {
         mapper.save(photoGallery);
     }
 
-    public PhotoGallery getPhotoGalleryByUserId( String userId)
+    public PhotoGalleryResponse getPhotoGalleryByUserId(String userId)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
@@ -39,7 +43,11 @@ public class PhotoGalleryDao {
 
         List<PhotoGallery> photogallery = mapper.scan(PhotoGallery.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(photogallery)) {
-            return photogallery.get(0);
+            PhotoGalleryResponse photoGalleryResponse = new PhotoGalleryResponse();
+            photoGalleryResponse.setPhotos(photogallery);
+            photoGalleryResponse.setStatus(HttpStatus.OK.toString());
+            photoGalleryResponse.setMessage(SUCCESS);
+            return photoGalleryResponse;
         }
         return null;
     }
@@ -80,6 +88,8 @@ public class PhotoGalleryDao {
             photogallery.get(0).setPhotoName(request.getPhotoName());
             if(request.getContactNumber()!= null)
             photogallery.get(0).setContactNumber(request.getContactNumber());
+            if(request.getRelationship()!=null)
+                photogallery.get(0).setRelationship(request.getRelationship());
             mapper.save(photogallery.get(0));
         }
     }

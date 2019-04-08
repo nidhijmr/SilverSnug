@@ -26,6 +26,7 @@ public class PhotoGalleryAPIController {
     @GetMapping("/SilverSnug/PhotoGallery/getPhotoGallery")
     public PhotoGalleryResponse getPhotoGallery(String userId)
     {
+        System.out.println(photoGalleryService.getPhotoGalleryByUserId(userId));
         return photoGalleryService.getPhotoGalleryByUserId(userId);
     }
 

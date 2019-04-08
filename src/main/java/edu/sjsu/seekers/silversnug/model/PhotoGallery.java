@@ -11,19 +11,22 @@ public class PhotoGallery {
     private String photo;
     private String photoName;
     private String contactNumber;
+    private String relationship;
 
     public PhotoGallery()
     {
 
     }
 
-    public PhotoGallery(String photoId, String userId, String photo, String photoName, String contactNumber)
+
+    public PhotoGallery(String photoId, String userId, String photo, String photoName, String contactNumber, String relationship)
     {
         this.photoId = photoId;
         this.userId = userId;
         this.photo = photo;
         this.photoName= photoName;
         this.contactNumber = contactNumber;
+        this.relationship = relationship;
 
     }
 
@@ -71,6 +74,14 @@ public class PhotoGallery {
 
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
+    }
+
+    public String getRelationship() {
+        return relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
     }
 
 }

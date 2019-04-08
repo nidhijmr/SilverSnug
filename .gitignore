@@ -22,6 +22,7 @@ classes/
 buildSrc/build
 /spring-*/build
 /src/asciidoc/build
+/src/main/resources/application.properties
 target/
 
 # Eclipse artifacts, including WTP generated manifests
