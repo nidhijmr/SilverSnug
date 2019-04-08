@@ -70,6 +70,26 @@ public class AddressBookDao {
         return null;
     }
 
+    public AddressBook getAddressByAddressName(String userId, String addressName) {
+        AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
+        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
+
+        Map<String, AttributeValue> values = new HashMap<>();
+        values.put(":userId", new AttributeValue().withS(userId));
+        values.put(":addressName", new AttributeValue().withS(addressName));
+
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("userId = :userId and addressName = :addressName")
+                .withExpressionAttributeValues(values);
+
+        List<AddressBook> addressId = mapper.scan(AddressBook.class, scanExpression);
+        if (!CollectionUtils.isNullOrEmpty(addressId)) {
+            System.out.println(addressId.get(0).getAddressId());
+            return addressId.get(0);
+        }
+        return null;
+    }
+
     public void removeAddress(String addressID) {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);

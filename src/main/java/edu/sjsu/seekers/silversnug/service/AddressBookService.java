@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.UUID;
 
 @Service
@@ -20,7 +21,7 @@ public class AddressBookService {
 
     public void authenticate(String username) {
         System.out.println("In service: " + username);
-        addressBookDao.authenticate(username);
+        getAddressBookDao().authenticate(username);
     }
 
     public GenericResponse saveAddress(AddressBookRequest request) {
@@ -32,7 +33,7 @@ public class AddressBookService {
         addressBook.setAddressName(request.getAddressName());
         addressBook.setLatitude(request.getLatitude());
         addressBook.setLongitude(request.getLongitude());
-        addressBookDao.save(addressBook);
+        getAddressBookDao().save(addressBook);
 
         GenericResponse response = new GenericResponse();
         response.setMessage(SUCCESS);
@@ -44,9 +45,22 @@ public class AddressBookService {
     public AddressBookResponse getAddressByUserId(String userId) {
         AddressBookResponse response = new AddressBookResponse();
 
-        AddressBookResponse addressBookResponse = addressBookDao.getAddressByUserId(userId);
+        AddressBookResponse addressBookResponse = getAddressBookDao().getAddressByUserId(userId);
         if (null != addressBookResponse) {
             response = addressBookResponse;
+        } else {
+            response.setMessage("No address found for this User");
+        }
+
+        return response;
+    }
+
+    public AddressBookResponse get1AddressByUserId(String userId,String addressName) {
+        AddressBookResponse response = new AddressBookResponse();
+
+        AddressBook addressBook = getAddressBookDao().getAddressByAddressName(userId,addressName);
+        if (null != addressBook) {
+            response.setAddressBooks(Collections.singletonList(addressBook));
         } else {
             response.setMessage("No address found for this User");
         }
@@ -57,9 +71,9 @@ public class AddressBookService {
     public GenericResponse removeAddress(String userId,String addressName) {
 
         GenericResponse response = new GenericResponse();
-        String addressID = addressBookDao.getAddressIdByAddressName(userId,addressName);
+        String addressID = getAddressBookDao().getAddressIdByAddressName(userId,addressName);
         if(addressID!=null) {
-            addressBookDao.removeAddress(addressID);
+            getAddressBookDao().removeAddress(addressID);
             response.setMessage(SUCCESS);
             response.setStatus(HttpStatus.OK.toString());
         }
@@ -71,4 +85,11 @@ public class AddressBookService {
         return response;
     }
 
+    public AddressBookDao getAddressBookDao() {
+        return addressBookDao;
+    }
+
+    public void setAddressBookDao(AddressBookDao addressBookDao) {
+        this.addressBookDao = addressBookDao;
+    }
 }
