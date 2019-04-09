@@ -52,16 +52,16 @@ public class PhotoGalleryDao {
         return null;
     }
 
-    public void deletePhoto( String userId, String photoId)
+    public void deletePhoto( String userId, String photoName)
     {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
 
         Map<String, AttributeValue> values = new HashMap<>();
         values.put(":userId", new AttributeValue().withS(userId));
-        values.put(":photoId", new AttributeValue().withS(photoId));
+        values.put(":photoName", new AttributeValue().withS(photoName));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userId = :userId and photoId = :photoId").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId and photoName = :photoName").withExpressionAttributeValues(values);
 
         List<PhotoGallery> photogallery = mapper.scan(PhotoGallery.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(photogallery)) {

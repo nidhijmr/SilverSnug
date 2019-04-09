@@ -70,7 +70,7 @@ public class PhotoGalleryService {
 
         PhotoGalleryResponse photoGalleryResponse = photoGalleryDao.getPhotoGalleryByUserId(request.getUserId());
         if(null!=photoGalleryResponse) {
-            photoGalleryDao.deletePhoto(request.getUserId(), request.getPhotoId());
+            photoGalleryDao.deletePhoto(request.getUserId(), request.getPhotoName());
 
             response.setMessage(SUCCESS);
             response.setStatus(HttpStatus.OK.toString());
