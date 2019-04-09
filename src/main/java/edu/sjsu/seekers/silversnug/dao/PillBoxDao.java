@@ -26,31 +26,31 @@ public class PillBoxDao {
     public void authenticate(String username) {
         System.out.println("In DAO: " + username);}
 
-        public void save(PillBox pillBox) {
-            AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
-            DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
-            mapper.save(pillBox);
+    public void save(PillBox pillBox) {
+        AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
+        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
+        mapper.save(pillBox);
+    }
+
+    public PillBoxResponse getPillByUserId(String userId) {
+        AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
+        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
+
+        Map<String, AttributeValue> values = new HashMap<>();
+        values.put(":userId", new AttributeValue().withS(userId));
+        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+                .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
+
+        List<PillBox> pillbox = mapper.scan(PillBox.class, scanExpression);
+        if (!CollectionUtils.isNullOrEmpty(pillbox)) {
+            PillBoxResponse pillBoxResponse = new PillBoxResponse();
+            pillBoxResponse.setPillBoxes(pillbox);
+            pillBoxResponse.setStatus(HttpStatus.OK.toString());
+            pillBoxResponse.setMessage(SUCCESS);
+            return pillBoxResponse;
         }
-
-        public PillBoxResponse getPillByUserId(String userId) {
-            AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
-            DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
-
-            Map<String, AttributeValue> values = new HashMap<>();
-            values.put(":userId", new AttributeValue().withS(userId));
-            DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                    .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
-
-            List<PillBox> pillbox = mapper.scan(PillBox.class, scanExpression);
-            if (!CollectionUtils.isNullOrEmpty(pillbox)) {
-                PillBoxResponse pillBoxResponse = new PillBoxResponse();
-                pillBoxResponse.setPillBoxes(pillbox);
-                pillBoxResponse.setStatus(HttpStatus.OK.toString());
-                pillBoxResponse.setMessage(SUCCESS);
-                return pillBoxResponse;
-            }
-            return null;
-        }
+        return null;
+    }
 
 
     public void deletePill(String pillboxId)
@@ -105,5 +105,4 @@ public class PillBoxDao {
         }
         return null;
     }
-    }
-
+}
