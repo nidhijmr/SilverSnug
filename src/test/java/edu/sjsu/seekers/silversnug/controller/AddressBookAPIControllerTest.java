@@ -46,7 +46,7 @@ public class AddressBookAPIControllerTest {
 
         AddressBookRequest request = mock(AddressBookRequest.class);
 
-      /*  when(controller.addAddress(request)).thenReturn(response);*/
+        when(controller.addAddress(request)).thenReturn((AddressBookResponse) response);
 
 
         GenericResponse result = controller.addAddress(request);
