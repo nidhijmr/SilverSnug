@@ -20,7 +20,9 @@ public class PillBox {
 
     }
 
-    public PillBox(String userId, String pillBoxId, String medicineName, String potency, String dosage, String notes) {
+    public PillBox(String pillBoxId, String userId, String medicineName, String potency, String dosage, String notes) {
+        this.userId=userId;
+        this.pillBoxId=pillBoxId;
         this.medicineName = medicineName;
         this.potency = potency;
         this.dosage = dosage;
