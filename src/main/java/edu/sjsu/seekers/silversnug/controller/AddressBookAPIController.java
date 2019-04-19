@@ -29,6 +29,12 @@ public class AddressBookAPIController {
         return addressBookService.get1AddressByUserId(userId,addressName);
     }
 
+    @PostMapping("/SilverSnug/Address/editAddress")
+    @ResponseBody
+    public AddressBookResponse editAddress(@RequestBody AddressBookRequest request) {
+        return addressBookService.editAddress(request);
+    }
+
     @PostMapping("/SilverSnug/Address/removeAddress")
     @ResponseBody
     public GenericResponse removeAddress(String userId,String addressName) {

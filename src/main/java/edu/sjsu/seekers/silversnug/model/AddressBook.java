@@ -11,17 +11,19 @@ public class AddressBook {
     private String addressName;
     private String latitude;
     private String longitude;
+    private String address;
 
     public AddressBook(){
 
     }
 
-    public AddressBook(String userId, String addressId, String addressName, String latitude, String longitude) {
+    public AddressBook(String userId, String addressId, String addressName, String latitude, String longitude, String address) {
         this.userId = userId;
         this.addressId = addressId;
         this.addressName = addressName;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.address = address;
     }
 
     @DynamoDBAttribute(attributeName = "userId")
@@ -67,5 +69,14 @@ public class AddressBook {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    @DynamoDBAttribute(attributeName = "address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

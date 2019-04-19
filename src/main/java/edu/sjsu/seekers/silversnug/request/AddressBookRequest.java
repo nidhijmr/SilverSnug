@@ -9,18 +9,20 @@ public class AddressBookRequest implements Serializable {
     private String addressName;
     private String latitude;
     private String longitude;
+    private String address;
 
     public AddressBookRequest()
     {
 
     }
 
-    public AddressBookRequest(String userId, String addressId, String addressName, String latitude, String longitude) {
+    public AddressBookRequest(String userId, String addressId, String addressName, String latitude, String longitude, String address) {
         this.userId = userId;
         this.addressId = addressId;
         this.addressName = addressName;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.address = address;
     }
 
     public String getUserId() {
@@ -63,14 +65,23 @@ public class AddressBookRequest implements Serializable {
         this.longitude = longitude;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "AddressBookRequest{" +
-                "userName='" + userId + '\'' +
+                "userId='" + userId + '\'' +
                 ", addressId='" + addressId + '\'' +
                 ", addressName='" + addressName + '\'' +
                 ", latitude='" + latitude + '\'' +
                 ", longitude='" + longitude + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
