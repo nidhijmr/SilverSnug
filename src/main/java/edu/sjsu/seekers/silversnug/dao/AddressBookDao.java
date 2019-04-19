@@ -89,6 +89,13 @@ public class AddressBookDao {
         return null;
     }
 
+    public void editAddress(AddressBook addressBook)
+    {
+        AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
+        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
+        mapper.save(addressBook);
+    }
+
     public void removeAddress(String addressID) {
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
