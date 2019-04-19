@@ -13,6 +13,7 @@ public class AddressBookDaoTest {
     private String TEST_ADD  = "TestAddressName";
     private String TEST_LAT = "0.00";
     private String TEST_LON = "0.00";
+    private String TEST_ADDRESS = "TestAddress";
     private AddressBookDao add_Dao ;
 
     @Before
@@ -20,7 +21,6 @@ public class AddressBookDaoTest {
     {
         add_Dao = new AddressBookDao();
         add_Dao.dynamodbClient = new DynamoDbClient();
-
     }
 
     @Test
@@ -28,7 +28,7 @@ public class AddressBookDaoTest {
     {
         String addressUUID = UUID.randomUUID().toString();
         System.out.println(addressUUID);
-        AddressBook addressBook = new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON);
+        AddressBook addressBook = new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON,TEST_ADDRESS);
         add_Dao.save(addressBook);
 
         AddressBook result = add_Dao.getAddressByAddressName(USER_ID,TEST_ADD);
@@ -48,7 +48,7 @@ public class AddressBookDaoTest {
     {
         String addressUUID = UUID.randomUUID().toString();
         System.out.println(addressUUID);
-        AddressBook addressBook = new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON);
+        AddressBook addressBook = new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON,TEST_ADDRESS);
         add_Dao.save(addressBook);
 
         AddressBook result = add_Dao.getAddressByAddressName(USER_ID,TEST_ADD);
@@ -68,7 +68,7 @@ public class AddressBookDaoTest {
     {
         String addressUUID = UUID.randomUUID().toString();
         System.out.println(addressUUID);
-        AddressBook addressBook = new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON);
+        AddressBook addressBook = new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON,TEST_ADDRESS);
         add_Dao.save(addressBook);
         add_Dao.removeAddress(addressUUID);
 
@@ -80,7 +80,5 @@ public class AddressBookDaoTest {
 
             assertTrue("Successfuly deleted the address",true);
         }
-
-
     }
 }
