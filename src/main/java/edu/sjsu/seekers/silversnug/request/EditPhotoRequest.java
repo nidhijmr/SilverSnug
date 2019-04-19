@@ -6,22 +6,20 @@ public class EditPhotoRequest implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private String userId;
-    private String photo;
     private String photoName;
     private String contactNumber;
-    private String relationship;
 
     public EditPhotoRequest()
     {
 
     }
 
-    public EditPhotoRequest(String photo, String photoName, String contactNumber, String relationship)
+    public EditPhotoRequest(String photoName, String contactNumber)
     {
-        this.photo = photo;
+
         this.photoName= photoName;
         this.contactNumber = contactNumber;
-        this.relationship = relationship;
+
     }
 
     public String getUserId() {
@@ -30,14 +28,6 @@ public class EditPhotoRequest implements Serializable{
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
     }
 
     public String getPhotoName() {
@@ -56,22 +46,13 @@ public class EditPhotoRequest implements Serializable{
         this.contactNumber = contactNumber;
     }
 
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
 
     @Override
     public String toString() {
-        return "PhotoGalleryRequest{" +
+        return "EditPhotoRequest{" +
                 "userId='" + userId + '\'' +
-                ", photo='" + photo + '\'' +
                 ", photoName='" + photoName + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
-                ", relationship='" + relationship + '\'' +
                 '}';
     }
 

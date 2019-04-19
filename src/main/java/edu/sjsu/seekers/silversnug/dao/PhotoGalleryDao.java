@@ -77,19 +77,17 @@ public class PhotoGalleryDao {
 
         Map<String, AttributeValue> values = new HashMap<>();
         values.put(":userId", new AttributeValue().withS(request.getUserId()));
+        values.put(":photoName", new AttributeValue().withS(request.getPhotoName()));
         DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
+                .withFilterExpression("userId = :userId and photoName = :photoName").withExpressionAttributeValues(values);
 
         List<PhotoGallery> photogallery = mapper.scan(PhotoGallery.class, scanExpression);
         if (!CollectionUtils.isNullOrEmpty(photogallery)) {
-            if(request.getPhoto()!= null)
-            photogallery.get(0).setPhoto(request.getPhoto());
+
             if(request.getPhotoName()!= null)
             photogallery.get(0).setPhotoName(request.getPhotoName());
             if(request.getContactNumber()!= null)
             photogallery.get(0).setContactNumber(request.getContactNumber());
-            if(request.getRelationship()!=null)
-                photogallery.get(0).setRelationship(request.getRelationship());
             mapper.save(photogallery.get(0));
         }
     }
