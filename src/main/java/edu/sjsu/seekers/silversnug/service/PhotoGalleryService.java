@@ -64,6 +64,7 @@ public class PhotoGalleryService {
         return response;
     }
 
+
     public GenericResponse deletePhoto(DeletePhotoRequest request)
     {
         GenericResponse response = new GenericResponse();
