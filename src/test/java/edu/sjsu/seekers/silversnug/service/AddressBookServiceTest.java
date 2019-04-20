@@ -26,6 +26,7 @@ public class AddressBookServiceTest {
     private String TEST_ADD  = "TestAddressName";
     private String TEST_LAT = "0.00";
     private String TEST_LON = "0.00";
+    private String TEST_ADDRESS = "TestAddress";
 //    AddressBook add;
 
     @Before
@@ -46,13 +47,12 @@ public class AddressBookServiceTest {
         GenericResponse result = service.saveAddress(request);
 
         if(result!=null){
-            assertEquals(result.getMessage(),"SUCCESS");
+            assertEquals(result.getMessage().toUpperCase(),"SUCCESS");
             assertEquals(result.getStatus(),HttpStatus.OK.toString());
         }
         else {
             assertFalse("Unable to find the addressbook Object ",true);
         }
-
     }
 
     @Test
@@ -60,11 +60,10 @@ public class AddressBookServiceTest {
     {
         List<AddressBook> addList = new ArrayList<AddressBook>();
         String addressUUID = UUID.randomUUID().toString();
-        addList.add(new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON));
+        addList.add(new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON,TEST_ADDRESS));
         AddressBookResponse response = new AddressBookResponse(addList);
         when(service.addressBookDao.getAddressByAddressName(USER_ID,TEST_ADD)).thenReturn(null);
         AddressBookResponse result = service.get1AddressByUserId(USER_ID,TEST_ADD);
-
 
         if(result!=null){
             assertEquals(result.getMessage(),"No address found for this User");
@@ -85,7 +84,6 @@ public class AddressBookServiceTest {
         when(service.addressBookDao.getAddressIdByAddressName(USER_ID,TEST_ADD)).thenReturn(null);
 //        when(service.removeAddress(USER_ID,TEST_ADD)).thenReturn(response);
 
-
         GenericResponse result = service.removeAddress(USER_ID,TEST_ADD);
 
 
@@ -97,7 +95,5 @@ public class AddressBookServiceTest {
 
             assertFalse("Unable to remoev address",true);
         }
-
-
     }
 }

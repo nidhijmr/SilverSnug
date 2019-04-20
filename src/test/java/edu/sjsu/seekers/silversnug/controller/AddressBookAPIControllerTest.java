@@ -27,38 +27,35 @@ public class AddressBookAPIControllerTest {
     private String TEST_ADD  = "TestAddressName";
     private String TEST_LAT = "0.00";
     private String TEST_LON = "0.00";
+    private String TEST_ADDRESS = "TestAddress";
 
     @Before
     public void setup()
     {
         controller = new AddressBookAPIController();
         controller.addressBookService = mock(AddressBookService.class);
-
     }
 
     @Test
     public void saveAddress()
     {
 
-        GenericResponse response = new GenericResponse();
+        AddressBookResponse response = new AddressBookResponse();
         response.setMessage("SUCCESS");
         response.setStatus(HttpStatus.OK.toString());
-
         AddressBookRequest request = mock(AddressBookRequest.class);
 
-        when(controller.addAddress(request)).thenReturn((AddressBookResponse) response);
+        when(controller.addAddress(request)).thenReturn(response);
 
-
-        GenericResponse result = controller.addAddress(request);
+        AddressBookResponse result = controller.addAddress(request);
 
         if(result!=null){
-            assertEquals(result.getMessage(),"SUCCESS");
+            assertEquals(result.getMessage().toUpperCase(),"SUCCESS");
             assertEquals(result.getStatus(),HttpStatus.OK.toString());
         }
         else {
             assertFalse("Unable to find the addressbook Object ",true);
         }
-
     }
 
     @Test
@@ -66,7 +63,7 @@ public class AddressBookAPIControllerTest {
     {
         List<AddressBook> addList = new ArrayList<AddressBook>();
         String addressUUID = UUID.randomUUID().toString();
-        addList.add(new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON));
+        addList.add(new AddressBook(USER_ID,addressUUID,TEST_ADD,TEST_LAT,TEST_LON,TEST_ADDRESS));
         AddressBookResponse response = new AddressBookResponse(addList);
 
         when(controller.getAddressByID(USER_ID,TEST_ADD)).thenReturn(response);
@@ -89,24 +86,18 @@ public class AddressBookAPIControllerTest {
         GenericResponse response = new GenericResponse();
         response.setMessage("SUCCESS");
         response.setStatus(HttpStatus.OK.toString());
-
         AddressBookRequest request = mock(AddressBookRequest.class);
 
         when(controller.removeAddress(USER_ID,TEST_ADD)).thenReturn(response);
 
-
         GenericResponse result = controller.removeAddress(USER_ID,TEST_ADD);
-
 
         if(result!=null){
             assertEquals(result.getMessage(),"SUCCESS");
             assertEquals(result.getStatus(),HttpStatus.OK.toString());
         }
         else {
-
-            assertFalse("Unable to remoev address",true);
+            assertFalse("Unable to remove address",true);
         }
-
-
     }
 }
