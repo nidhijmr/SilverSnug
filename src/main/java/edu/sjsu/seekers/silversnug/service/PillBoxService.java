@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static edu.sjsu.seekers.silversnug.util.Constants.*;
@@ -81,23 +83,27 @@ public class PillBoxService {
     }
 
 
-    public GenericResponse editPill(EditPillRequest request) {
+    public PillBoxResponse editPill(PillBoxRequest request) {
 
-        GenericResponse response = new GenericResponse();
+        PillBox pillBox = new PillBox();
 
-        PillBoxResponse pillBox = pillBoxDao.getPillByUserId(request.getUserId());
-        if(null!=pillBox) {
-            pillBoxDao.editPill(request);
-
-            response.setMessage(SUCCESS);
-            response.setStatus(HttpStatus.OK.toString());
+        pillBox.setUserId(request.getUserId());
+        pillBox.setPillBoxId(request.getPillBoxId());
+        pillBox.setMedicineName(request.getMedicineName());
+        pillBox.setDosage(request.getDosage());
+        pillBox.setPotency(request.getPotency());
+        pillBox.setNotes(request.getNotes());
+        if(pillBox.getPillBoxId()!=null) {
+            pillBoxDao.editPill(pillBox);
         }
-        else
-        {
-            response.setMessage(UNSUCCESSFUL_PILL_USER);
-        }
+
+        PillBoxResponse response = new PillBoxResponse();
+        List<PillBox> pillBoxList = new ArrayList<>();
+        pillBoxList.add(pillBox);
+        response.setPillBoxes(pillBoxList);
+        response.setMessage(SUCCESS_GET);
+        response.setStatus(HttpStatus.OK.toString());
 
         return response;
-
     }
 }
