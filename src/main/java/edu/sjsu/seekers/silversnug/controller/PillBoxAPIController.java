@@ -38,7 +38,7 @@ public class PillBoxAPIController {
 
     @PostMapping("/SilverSnug/PillBox/editPill")
     @ResponseBody
-    public GenericResponse editPill(@RequestBody EditPillRequest request)
+    public GenericResponse editPill(@RequestBody PillBoxRequest request)
     {
         return pillBoxService.editPill(request);
     }

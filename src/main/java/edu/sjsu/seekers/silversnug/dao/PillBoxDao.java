@@ -62,51 +62,12 @@ public class PillBoxDao {
 
     }
 
-    public void editPill(EditPillRequest request)
+    public void editPill(PillBox pillBox)
     {
-        /*AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
-        DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
-
-        Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userId", new AttributeValue().withS(request.getUserId()));
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userId = :userId").withExpressionAttributeValues(values);
-
-        List<PillBox> pillBox = mapper.scan(PillBox.class, scanExpression);
-        if (!CollectionUtils.isNullOrEmpty(pillBox)){
-            if(request.getMedicineName()!= null)
-                pillBox.get(0).setMedicineName(request.getMedicineName());
-            if(request.getNotes()!= null)
-                pillBox.get(0).setNotes(request.getNotes());
-            if(request.getPotency()!= null)
-                pillBox.get(0).setPotency(request.getPotency());
-            if (request.getDosage()!=null)
-                pillBox.get(0).setDosage(request.getDosage());
-            mapper.save(pillBox.get(0));
-        }*/
 
         AmazonDynamoDB dynamoDB = dynamodbClient.getDynamoDB();
         DynamoDBMapper mapper = new DynamoDBMapper(dynamoDB);
-
-        Map<String, AttributeValue> values = new HashMap<>();
-        values.put(":userId", new AttributeValue().withS(request.getUserId()));
-        values.put(":medicineName", new AttributeValue().withS(request.getMedicineName()));
-        DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-                .withFilterExpression("userId = :userId and medicineName = :medicineName").withExpressionAttributeValues(values);
-
-        List<PillBox> pillBox = mapper.scan(PillBox.class, scanExpression);
-        if (!CollectionUtils.isNullOrEmpty(pillBox)) {
-
-            if(request.getMedicineName()!= null)
-                pillBox.get(0).setMedicineName(request.getMedicineName());
-            if(request.getDosage()!= null)
-                pillBox.get(0).setDosage(request.getDosage());
-            if(request.getPotency()!= null)
-                pillBox.get(0).setPotency(request.getPotency());
-            if(request.getNotes()!= null)
-                pillBox.get(0).setNotes(request.getNotes());
-            mapper.save(pillBox.get(0));
-        }
+        mapper.save(pillBox);
     }
 
 

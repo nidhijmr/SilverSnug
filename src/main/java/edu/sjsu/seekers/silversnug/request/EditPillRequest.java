@@ -19,6 +19,7 @@ public class EditPillRequest implements Serializable {
 
     public EditPillRequest(String medicineName, String potency, String dosage, String notes)
     {
+        this.userId=
         this.medicineName = medicineName;
         this.potency= potency;
         this.dosage = dosage;
