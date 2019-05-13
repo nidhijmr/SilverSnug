@@ -99,16 +99,4 @@ public class PillBoxControllerTest {
         assertEquals(genericResponseFinal.getStatus(), genericResponse.getStatus());
     }
 
-    @Test
-    public void editPill() {
-        PillBoxRequest pillBoxRequest = mock(PillBoxRequest.class);
-        //when(pillBoxAPIController.pillBoxService.editPill(editPillRequest)).thenReturn(genericResponse);
-
-        //genericResponseFinal = pillBoxAPIController.editPill(editPillRequest);
-
-        assertEquals(genericResponseFinal.getMessage(), genericResponse.getMessage());
-        assertEquals(genericResponseFinal.getStatus(), genericResponse.getStatus());
-
-    }
-
 }
